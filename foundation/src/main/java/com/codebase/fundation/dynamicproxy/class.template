@@ -1,0 +1,7 @@
+package &Package;
+final public class &Name &Extends &Implements
+{
+    private java.lang.reflect.InvocationHandler handler = null;
+    &Constructors
+    &Methods
+}

@@ -1,0 +1,14 @@
+&Modifiers &ReturnType &MethodName(&Parameters) &Throwables
+{
+    java.lang.reflect.Method method = null;
+    try {
+        method = &Class.getMethod( \"& MethodName\", &ParameterTypes );
+    }
+    catch(Exception e){
+    }
+    Object r = null;
+    try{
+        r = handler.invoke( this, method, &ParameterValues );
+    }&Exceptions
+    &Return
+}
