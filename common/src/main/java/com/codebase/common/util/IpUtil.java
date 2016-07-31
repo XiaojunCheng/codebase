@@ -2,86 +2,58 @@ package com.codebase.common.util;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
+import java.net.UnknownHostException;
 import java.util.Enumeration;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+class IpUtil {
 
-public class IpUtil {
+    private static String OS = System.getProperty("os.name").toLowerCase().trim();
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(IpUtil.class);
-
-    public static final String IP = getHostAddress();
-
-    private static boolean isWindowsOS(String osName) {
-        if (osName == null || osName.isEmpty()) {
-            return false;
-        }
-
-        osName = osName.toLowerCase().trim();
-        if (osName.startsWith("windows")) {
-            return true;
-        }
-
-        return false;
+    private static boolean isWindowsOS() {
+        return OS.startsWith("windows");
     }
 
-    private static boolean isLinuxOS(String osName) {
-        if (osName == null || osName.isEmpty()) {
-            return false;
-        }
-
-        osName = osName.toLowerCase().trim();
-        if (osName.startsWith("linux")) {
-            return true;
-        }
-
-        return false;
+    private static boolean isLinuxOS() {
+        return OS.startsWith("linux");
     }
 
-    private static String getLinuxOSHostAddress() throws Exception {
+    private static String getWindowsIp() throws UnknownHostException {
+        return InetAddress.getByName(System.getenv("COMPUTERNAME")).getHostAddress();
+    }
+
+    private static String getLinuxOSIp() throws Exception {
 
         Enumeration<NetworkInterface> netInterfaces = NetworkInterface.getNetworkInterfaces();
         while (netInterfaces.hasMoreElements()) {
-            //
             NetworkInterface ni = netInterfaces.nextElement();
+
             Enumeration<InetAddress> ipAddresses = ni.getInetAddresses();
-            LOGGER.info("ni: " + ni.toString());
-            //
             while (ipAddresses.hasMoreElements()) {
-                //
                 InetAddress address = ipAddresses.nextElement();
-                LOGGER.info("\taddress: " + address.toString());
-                //
                 if (address.isSiteLocalAddress() //
-                        && !address.isLoopbackAddress() // 127.开头的都是lookback地址
+                        && !address.isLoopbackAddress() // 127.开头的都是loopback地址
                         && address.getHostAddress().indexOf(":") == -1 //
                 ) {
-                    LOGGER.info("find address name: " + address.getHostName());
                     return address.getHostAddress();
                 }
             }
-
         }
 
         return InetAddress.getLocalHost().getHostAddress();
     }
 
-    private static String getHostAddress() {
-
-        String osName = System.getProperty("os.name").toLowerCase().trim();
-        LOGGER.info("os name: " + osName);
-
+    public static String getIp() {
         try {
-            if (isWindowsOS(osName)) {
-                return InetAddress.getByName(System.getenv("COMPUTERNAME")).getHostAddress();
-            } else if (isLinuxOS(osName)) {
-                return getLinuxOSHostAddress();
+            if (isWindowsOS()) {
+                return getWindowsIp();
+            } else if (isLinuxOS()) {
+                return getLinuxOSIp();
             } else {
-                return getLinuxOSHostAddress();
+                return getLinuxOSIp();
             }
         } catch (Exception e) {
-            throw new RuntimeException("acquire local host ip address error.");
+            throw new RuntimeException("acquire ip error", e);
         }
     }
+
 }

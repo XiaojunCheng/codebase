@@ -4,8 +4,31 @@ import java.lang.management.ManagementFactory;
 
 public class SystemUtil {
 
-    public static final String IP = IpUtil.IP;
+    public static final String IP = IpUtil.getIp();
     public static final int PID = Integer.parseInt(ManagementFactory.getRuntimeMXBean().getName().split("@")[0]);
+
+    public static int ipToInt(String ip) {
+        String[] ss = ip.split("\\.");
+        if (ss.length != 4) {
+            return 0;
+        }
+        byte[] bytes = new byte[ss.length];
+        for (int i = 0; i < bytes.length; i++) {
+            bytes[i] = (byte) Integer.parseInt(ss[i]);
+        }
+        return ByteUtil.bytesToInt(bytes, 0);
+    }
+
+    public static String intToIp(int ip) {
+        return bytesToIp(ByteUtil.intToBytes(ip), 0);
+    }
+
+    public static String bytesToIp(byte[] data, int pos) {
+        return ByteUtil.toUnsignedByte(data[pos]) + "." //
+                + ByteUtil.toUnsignedByte(data[pos + 1]) + "." //
+                + ByteUtil.toUnsignedByte(data[pos + 2]) + "." //
+                + ByteUtil.toUnsignedByte(data[pos + 3]);
+    }
 
     public static String getProperty(String key) {
         return System.getProperty(key);

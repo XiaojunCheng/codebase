@@ -6,7 +6,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.UUID;
 
-public class ByteConverterUtil {
+public class ByteUtil {
 
     public static byte[] shortToBytes(short num) {
         byte[] b = new byte[2];
@@ -42,15 +42,6 @@ public class ByteConverterUtil {
         return num;
     }
 
-    public static long bytesToInt2(byte[] data, int offset) {
-        long num = 0;
-        for (int i = offset + 3; i >= offset; i--) {
-            num <<= 8;
-            num |= (data[i] & 0xff);
-        }
-        return num;
-    }
-
     public static byte[] longToBytes(long num) {
         byte[] b = new byte[8];
         for (int i = 0; i < 8; i++) {
@@ -69,12 +60,13 @@ public class ByteConverterUtil {
     }
 
     public static byte[] uuidToByteArray(UUID sessionId) {
+
         byte[] part1 = longToBytes(sessionId.getMostSignificantBits());
         byte[] part2 = longToBytes(sessionId.getLeastSignificantBits());
-        byte[] buffer = new byte[part1.length + part2.length];
 
-        System.arraycopy(part1, 0, buffer, 0, part1.length);
-        System.arraycopy(part2, 0, buffer, part1.length, part2.length);
+        byte[] buffer = new byte[16];
+        System.arraycopy(part1, 0, buffer, 0, 8);
+        System.arraycopy(part2, 0, buffer, 8, 8);
 
         return buffer;
     }
@@ -83,14 +75,10 @@ public class ByteConverterUtil {
         return new UUID(bytesToLong(data, 0), bytesToLong(data, 8));
     }
 
-    public static String intToAddress(byte[] data, int pos) {
-        return toUnsignedByte(data[pos]) + "." + toUnsignedByte(data[pos + 1]) + "." + toUnsignedByte(data[pos + 2]) + "." + toUnsignedByte(data[pos + 3]);
-    }
-
     public static int toUnsignedByte(byte data) {
         return data & 0x0FF;
     }
-
+    
     /***
      * @param b 
      * @param position range from 0 to 7
