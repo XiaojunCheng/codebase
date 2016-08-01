@@ -16,6 +16,7 @@
         <module>foundation</module>
         <module>core</module>
         <module>common</module>
+        <module>framework</module>
     </modules>
 
     <dependencyManagement>
@@ -24,6 +25,16 @@
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
                 <version>1.7.12</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-recipes</artifactId>
+                <version>2.10.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>1.2.7</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
