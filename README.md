@@ -2,12 +2,13 @@
 
 主要是平时总结的一些Java代码，主要包括以下几个方面：
 
-* Java基础
+* 通用基础类 `codebase-common`
+* Java基础 `codebase-fundation`
    - nio
    - concurrent
    - dynamic proxy
    - ...
-* 基础组件使用
+* 基础组件使用 `codebase-framework`
    - zookeeper
    - netty
    - redis
