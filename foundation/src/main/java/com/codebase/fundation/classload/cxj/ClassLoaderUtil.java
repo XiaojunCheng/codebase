@@ -1,13 +1,9 @@
 package com.codebase.fundation.classload.cxj;
 
-import com.codebase.common.util.StringUtil;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.File;
 import java.net.URI;
 import java.net.URL;
+import java.net.URLClassLoader;
 import java.security.CodeSource;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -16,6 +12,11 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.codebase.common.util.StringUtil;
 
 /**
  * 一些坑:
@@ -38,11 +39,11 @@ public class ClassLoaderUtil {
     }
 
     @SuppressWarnings("unchecked")
-    private static <T> List<Class<? extends T>> scanJar(String file, ClassFilter<T> filter) throws Exception {
+    public static <T> List<Class<? extends T>> scanJar(String file, ClassFilter<T> filter) throws Exception {
 
         List<Class<? extends T>> clazzList = new ArrayList<>();
 
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        URLClassLoader classLoader = new URLClassLoader(new URL[] {new File(file).toURI().toURL()}, Thread.currentThread().getContextClassLoader());
         JarFile jarFile = new JarFile(file);
         final Enumeration<JarEntry> entries = jarFile.entries();
         while (entries.hasMoreElements()) {
@@ -63,19 +64,17 @@ public class ClassLoaderUtil {
             }
         }
         jarFile.close();
+        classLoader.close();
         return clazzList;
     }
 
     @SuppressWarnings("unchecked")
-    private static <T> List<Class<? extends T>> scanPackage(String packageName, ClassFilter<T> filter) throws Exception {
+    public static <T> List<Class<? extends T>> scanPackage(String packageName, ClassFilter<T> filter) throws Exception {
 
         List<Class<? extends T>> list = new ArrayList<>();
         ClassLoader loader = Thread.currentThread().getContextClassLoader();
         String resourceName = packageName.replaceAll("\\.", "/");
         URL url = loader.getResource(resourceName);
-        if (url == null) {
-            return list;
-        }
         URI uri = url.toURI();
         if ("jar".equals(uri.getScheme())) {
             CodeSource source = ClassLoaderUtil.class.getProtectionDomain().getCodeSource();
@@ -86,7 +85,7 @@ public class ClassLoaderUtil {
                     break;
                 }
                 String name = e.getName();
-                if (!name.startsWith(resourceName) || !name.endsWith(".class") || name.contains("$")) {
+                if (!name.startsWith(resourceName) || !isClass(name)) {
                     continue;
                 }
                 Class<?> clazz = loader.loadClass(name.replaceAll("/", ".").replace(".class", ""));
@@ -110,7 +109,11 @@ public class ClassLoaderUtil {
     private static <T> void scanFile(ClassLoader loader, String packageName, File file, ClassFilter<T> filter, List<Class<? extends T>> list)
             throws ClassNotFoundException {
         if (file.isFile()) {
-            String className = file.getName().replace(".class", "");
+            String fileName = file.getName();
+            if (isNotClass(fileName)) {
+                return;
+            }
+            String className = fileName.replace(".class", "");
             Class clazz = loader.loadClass(packageName + "." + className);
             if (!filter.accept(clazz)) {
                 return;
@@ -125,29 +128,6 @@ public class ClassLoaderUtil {
                     scanFile(loader, subPackageName, f, filter, list);
                 }
             }
-        }
-    }
-
-    public static void main(String[] args) throws Exception {
-
-        List<Class<? extends Runnable>> runnables = scanJar("", new ClassFilter<Runnable>() {
-            @Override
-            public boolean accept(Class<?> clazz) {
-                return Runnable.class.isAssignableFrom(clazz);
-            }
-        });
-        for (Class<? extends Runnable> c : runnables) {
-            LOGGER.info(c.getName());
-        }
-
-        List<Class<? extends Object>> object = scanPackage("com.codebase", new ClassFilter<Object>() {
-            @Override
-            public boolean accept(Class<?> clazz) {
-                return true;
-            }
-        });
-        for (Class<? extends Object> c : object) {
-            System.out.println(c.getName());
         }
     }
 
