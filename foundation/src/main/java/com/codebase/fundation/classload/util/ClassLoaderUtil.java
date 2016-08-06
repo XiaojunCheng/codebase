@@ -1,4 +1,4 @@
-package com.codebase.fundation.classload.cxj;
+package com.codebase.fundation.classload.util;
 
 import java.io.File;
 import java.net.URI;
@@ -68,7 +68,7 @@ public class ClassLoaderUtil {
         return clazzList;
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("all")
     public static <T> List<Class<? extends T>> scanPackage(String packageName, ClassFilter<T> filter) throws Exception {
 
         List<Class<? extends T>> list = new ArrayList<>();
