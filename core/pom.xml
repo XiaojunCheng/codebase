@@ -11,4 +11,11 @@
 
     <artifactId>codebase-core</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.codebase</groupId>
+            <artifactId>codebase-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 </project>

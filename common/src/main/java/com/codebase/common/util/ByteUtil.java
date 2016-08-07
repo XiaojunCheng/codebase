@@ -8,6 +8,8 @@ import java.util.UUID;
 
 public class ByteUtil {
 
+    public static final byte CR = '\r';
+    public static final byte LF = '\n';
     public static final byte[] EMPTY = new byte[0];
 
     public static byte[] shortToBytes(short num) {
