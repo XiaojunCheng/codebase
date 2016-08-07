@@ -7,10 +7,9 @@
    - nio
    - concurrent
    - dynamic proxy
-   - ...
 * 基础组件使用 `codebase-framework`
    - zookeeper
    - jetty
    - netty
+* 核心代码实现 `codebase-core`
    - redis
-   - ...
