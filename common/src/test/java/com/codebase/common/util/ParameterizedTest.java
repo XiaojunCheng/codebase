@@ -1,6 +1,6 @@
 package com.codebase.common.util;
 
-public class Test {
+public class ParameterizedTest {
 
     public static void main(String[] args) {
         //

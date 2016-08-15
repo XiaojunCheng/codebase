@@ -13,6 +13,10 @@ public class ShellUtil {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ShellUtil.class);
 
+    public static String execCommand(String... cmd) throws IOException {
+        return execCommand(null, cmd);
+    }
+
     public static String execCommand(Map<String, String> env, String... cmd) throws IOException {
         ShellUtil exec = new ShellUtil(cmd, env);
         exec.execute();
