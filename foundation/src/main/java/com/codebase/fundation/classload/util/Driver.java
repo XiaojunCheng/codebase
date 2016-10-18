@@ -22,9 +22,9 @@ public class Driver {
             if(url.getProtocol().equals("jar")) {
                 System.out.println(url);
                 System.out.println(url.toURI().getScheme());
-                String[] infos = URLDecoder.decode(url.getPath()).split("!");
-                String jarFilePath = infos[0].substring(infos[0].indexOf("/"));
-                String packagePath = infos[1].substring(1);
+                String[] infoArray = URLDecoder.decode(url.getPath()).split("!");
+                String jarFilePath = infoArray[0].substring(infoArray[0].indexOf("/"));
+                String packagePath = infoArray[1].substring(1);
                 System.out.println(jarFilePath);
                 System.out.println(packagePath);
                 JarFile jarFile = new JarFile(jarFilePath);
