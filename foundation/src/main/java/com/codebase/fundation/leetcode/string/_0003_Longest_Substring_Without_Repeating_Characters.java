@@ -1,4 +1,4 @@
-package com.codebase.fundation.leetcode;
+package com.codebase.fundation.leetcode.string;
 
 import java.util.HashSet;
 import java.util.Set;

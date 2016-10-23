@@ -1,4 +1,4 @@
-package com.codebase.fundation.leetcode;
+package com.codebase.fundation.leetcode.sum;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,7 +6,7 @@ import java.util.Map;
 public class _0001_Two_Sum {
 
     public static int[] twoSum(int[] nums, int target) {
-        Map<Integer/*value*/, Integer/*index*/> maps = new HashMap<Integer, Integer>();
+        Map<Integer/*value*/, Integer/*index*/> maps = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
             int num2 = target - nums[i];
             if (maps.containsKey(num2)) {
@@ -28,6 +28,5 @@ public class _0001_Two_Sum {
         for (int r : result) {
             System.out.println(r);
         }
-
     }
 }

@@ -1,4 +1,4 @@
-package com.codebase.fundation.leetcode;
+package com.codebase.fundation.leetcode.cases;
 
 public class _0008_String_to_Integer_atoi {
 

@@ -1,9 +1,7 @@
-package com.codebase.fundation.leetcode;
+package com.codebase.fundation.leetcode.string;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 public class _0003_Longest_Substring_Without_Repeating_Characters_2 {
 

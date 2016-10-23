@@ -1,4 +1,4 @@
-package com.codebase.fundation.leetcode;
+package com.codebase.fundation.leetcode.link;
 
 public class _0024_Swap_Nodes_in_Pairs {
 
