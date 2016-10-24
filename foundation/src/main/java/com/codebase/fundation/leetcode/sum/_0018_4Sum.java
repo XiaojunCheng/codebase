@@ -11,127 +11,52 @@ public class _0018_4Sum {
             return solutions;
         }
 
-        List<Integer> numList = new ArrayList<>();
-        for (int i = 0; i < nums.length; i++) {
-            numList.add(nums[i]);
-        }
-        Collections.sort(numList);
-
-        Map<Integer/*value*/, Integer> valueCount = new HashMap<>();
-        for (int index = 0; index < nums.length; index++) {
-            int value = numList.get(index);
-            if (!valueCount.containsKey(value)) {
-                valueCount.put(value, 0);
-            }
-            valueCount.put(value, valueCount.get(value) + 1);
+        Arrays.sort(nums);
+        if (nums[0] * 4 > target || nums[nums.length - 1] * 4 < target) {
+            return solutions;
         }
 
-        Map<Integer/*sum*/, Set<Integer/*one*/>> sumIndex = new HashMap<>();
-        for (int indexI = 0; indexI < nums.length - 1; indexI++) {
-            for (int indexJ = indexI + 1; indexJ < nums.length; indexJ++) {
-                int one = numList.get(indexI);
-                int two = numList.get(indexJ);
-                int sum = one + two;
-                if (!sumIndex.containsKey(sum)) {
-                    sumIndex.put(sum, new HashSet<Integer>());
-                }
-                sumIndex.get(sum).add(one);
-            }
-        }
-
-        Set<Integer> sumSet = sumIndex.keySet();
-        List<Integer> sumList = new ArrayList<>();
-        sumList.addAll(sumSet);
-        Collections.sort(sumList);
-        Set<Integer> remainSumSet = new HashSet<>();
-        remainSumSet.addAll(sumSet);
-
-        for (int i = 0; i < sumList.size(); i++) {
-            int leftSum = sumList.get(i);
-            int rightSum = target - leftSum;
-            if (!remainSumSet.contains(rightSum)) {
-                remainSumSet.remove(leftSum);
+        for (int one = 0; one <= nums.length - 4; one++) {
+            if (one > 0 && nums[one] == nums[one - 1]) {
                 continue;
             }
 
-            remainSumSet.remove(rightSum);
-            if (leftSum == rightSum) {
-                Set<Integer> candidateSet = sumIndex.get(leftSum);
-                List<Integer> candidates = new ArrayList<>();
-                candidates.addAll(candidateSet);
-                Collections.sort(candidates);
-                for (int i = 0; i < candidates.size(); i++) {
-                    for (int j = i; j < candidates.size(); j++) {
-                        int one = candidates.get(i);
-                        int two = leftSum - one;
-                        int three = candidates.get(j);
-                        int four = leftSum - three;
-                        if (two > three) {
+            if (nums[one] * 4 > target) {
+                one = nums.length - 3;
+                continue;
+            }
+
+            for (int two = one + 1; two <= nums.length - 3; two++) {
+                if (two > one + 1 && nums[two] == nums[two - 1]) {
+                    continue;
+                }
+
+                if (nums[one] + nums[two] * 3 > target) {
+                    two = nums.length - 2;
+                    continue;
+                }
+
+                int sum = target - nums[one] - nums[two];
+                Set<Integer> candidates = new HashSet<>();
+                Set<Integer> needRemove = new HashSet<>();
+                candidates.add(nums[two + 1]);
+                for (int four = two + 2; four <= nums.length - 1; four++) {
+                    if (!candidates.contains(sum - nums[four])) {
+                        if (nums[one] + nums[two] + nums[two + 1] + nums[four] > target) {
+                            four = nums.length;
                             continue;
                         }
-
-                        int oneCount = 1 + (two == one ? 1 : 0) + (three == one ? 1 : 0) + (four == one ? 1 : 0);
-                        int twoCount = 1 + (three == two ? 1 : 0) + (four == two ? 1 : 0);
-                        int threeCount = 1 + (four == three ? 1 : 0);
-
-                        if (valueCount.get(one) < oneCount || valueCount.get(two) < twoCount || valueCount.get(three) < threeCount) {
-                            continue;
-                        }
-
-                        List<Integer> solution = new ArrayList<>();
-                        solution.add(one);
-                        solution.add(two);
-                        solution.add(three);
-                        solution.add(four);
-                        solutions.add(solution);
-                    }
-                }
-                remainSumSet.remove(leftSum);
-                remainSumSet.remove(rightSum);
-                continue;
-            }
-
-
-        }
-        //
-
-        for (int leftSum : sumList) {
-            int sumTwo = target - leftSum;
-            if (!remainSumSet.contains(sumTwo)) {
-                continue;
-            }
-
-            remainSumSet.remove(leftSum);
-            remainSumSet.remove(sumTwo);
-
-
-            Set<Integer> onesInSumOne = sumIndex.get(leftSum);
-            List<Integer> oneList = new ArrayList<>();
-            oneList.addAll(onesInSumOne);
-            Collections.sort(oneList);
-            Set<Integer> threesInSumTwo = sumIndex.get(sumTwo);
-            for (int one : oneList) {
-                for (int three : threesInSumTwo) {
-                    int two = leftSum - one;
-                    int four = sumTwo - three;
-                    if (two > three) {
+                        candidates.add(nums[four]);
                         continue;
                     }
 
-                    int oneCount = 1 + (two == one ? 1 : 0) + (three == one ? 1 : 0) + (four == one ? 1 : 0);
-                    int twoCount = 1 + (three == two ? 1 : 0) + (four == two ? 1 : 0);
-                    int threeCount = 1 + (four == three ? 1 : 0);
-
-                    if (valueCount.get(one) < oneCount || valueCount.get(two) < twoCount || valueCount.get(three) < threeCount) {
+                    if (needRemove.contains(nums[four])) {
                         continue;
                     }
 
-                    List<Integer> solution = new ArrayList<>();
-                    solution.add(one);
-                    solution.add(two);
-                    solution.add(three);
-                    solution.add(four);
-                    solutions.add(solution);
+                    solutions.add(Arrays.asList(nums[one], nums[two], sum - nums[four], nums[four]));
+                    needRemove.add(nums[four]);
+                    needRemove.add(sum - nums[four]);
                 }
             }
         }
@@ -144,12 +69,16 @@ public class _0018_4Sum {
         int[][] data = {
                 {1, 0, -1, 0, -2, 2},//
                 {-1, 0, 1, 2, -1, -4},//
-                {0, 4, -5, 2, -2, 4, 2, -1, 4}//
+                {0, 4, -5, 2, -2, 4, 2, -1, 4},//
+                {-3, -2, -1, 0, 0, 1, 2, 3},//
+                {0, 1, 5, 0, 1, 5, 5, -4}
         };
         int[] targets = {
                 0, //
                 -1,//
-                12//
+                12,//
+                0,//
+                11//
         };
         for (int i = 0; i < data.length; i++) {
             System.out.println("============");
