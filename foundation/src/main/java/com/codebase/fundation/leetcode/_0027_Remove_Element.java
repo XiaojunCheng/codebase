@@ -1,8 +1,5 @@
 package com.codebase.fundation.leetcode;
 
-/**
- * Created by chengxiaojun on 16/10/20.
- */
 public class _0027_Remove_Element {
 
     public int removeElement(int[] nums, int val) {

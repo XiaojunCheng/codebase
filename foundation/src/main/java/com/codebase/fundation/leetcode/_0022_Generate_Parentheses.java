@@ -2,9 +2,6 @@ package com.codebase.fundation.leetcode;
 
 import java.util.*;
 
-/**
- * Created by chengxiaojun on 16/10/24.
- */
 public class _0022_Generate_Parentheses {
 
 

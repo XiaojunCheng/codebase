@@ -1,18 +1,6 @@
 package com.codebase.fundation.leetcode.link;
 
-/**
- * Created by chengxiaojun on 16/10/24.
- */
 public class _0019_Remove_Nth_Node_From_End_of_List {
-
-    static class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-        }
-    }
 
     public ListNode removeNthFromEnd(ListNode head, int n) {
 
@@ -39,20 +27,6 @@ public class _0019_Remove_Nth_Node_From_End_of_List {
             flagTwo = flagTwo.next;
         }
         flagOne.next = flagOne.next.next;
-        return head;
-    }
-
-    public static ListNode buildListNode(int[] nums) {
-        if (nums == null || nums.length <= 0) {
-            return null;
-        }
-
-        ListNode head = new ListNode(nums[0]);
-        ListNode tmp = head;
-        for (int i = 1; i < nums.length; i++) {
-            tmp.next = new ListNode(nums[i]);
-            tmp = tmp.next;
-        }
         return head;
     }
 
@@ -88,7 +62,7 @@ public class _0019_Remove_Nth_Node_From_End_of_List {
         };
 
         for (int i = 0; i < index.length; i++) {
-            ListNode head = buildListNode(data[i]);
+            ListNode head = ListNode.buildListNode(data[i]);
             printListNode(main.removeNthFromEnd(head, index[i]));
         }
     }

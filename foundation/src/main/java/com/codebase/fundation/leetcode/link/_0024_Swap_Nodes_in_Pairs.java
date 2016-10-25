@@ -2,15 +2,6 @@ package com.codebase.fundation.leetcode.link;
 
 public class _0024_Swap_Nodes_in_Pairs {
 
-    class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-        }
-    }
-
     public ListNode swapPairs(ListNode head) {
 
         if (head == null || head.next == null) {

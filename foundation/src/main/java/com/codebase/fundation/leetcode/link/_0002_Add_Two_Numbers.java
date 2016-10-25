@@ -5,16 +5,7 @@ package com.codebase.fundation.leetcode.link;
  */
 public class _0002_Add_Two_Numbers {
 
-    static class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-        }
-    }
-
-    public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 
         if (l1 == null || l2 == null) {
             return l1 == null ? l2 : l2;
@@ -54,7 +45,6 @@ public class _0002_Add_Two_Numbers {
 
         while (true) {
             pos1.next.val += addToHigh;
-            addToHigh = 0;
             if (pos1.next.val < 10) {
                 return head;
             }
@@ -70,38 +60,14 @@ public class _0002_Add_Two_Numbers {
     }
 
     public static void main(String[] args) {
+        _0002_Add_Two_Numbers main = new _0002_Add_Two_Numbers();
         int[] value1 = {2, 4, 3};
-        //        int[] value1 = {2, 4, 5, 9, 9};
-        //        int[] value1 = {5};
-        ListNode l1 = buildListNode(value1);
-        printListNode(l1);
+        ListNode l1 = ListNode.buildListNode(value1);
+        ListNode.printListNode(l1);
         int[] value2 = {5, 6, 4};
-        //        int[] value2 = {};
-        ListNode l2 = buildListNode(value2);
-        printListNode(l2);
-        ListNode l3 = addTwoNumbers(l1, l2);
-        printListNode(l3);
-    }
-
-    private static void printListNode(ListNode l) {
-        while (l != null) {
-            System.out.print(l.val + " -> ");
-            l = l.next;
-        }
-        System.out.println();
-    }
-
-    private static ListNode buildListNode(int[] values) {
-        if (values == null || values.length == 0) {
-            return null;
-        }
-
-        ListNode head = new ListNode(values[0]);
-        ListNode pos = head;
-        for (int i = 1; i < values.length; i++) {
-            pos.next = new ListNode(values[i]);
-            pos = pos.next;
-        }
-        return head;
+        ListNode l2 = ListNode.buildListNode(value2);
+        ListNode.printListNode(l2);
+        ListNode l3 = main.addTwoNumbers(l1, l2);
+        ListNode.printListNode(l3);
     }
 }

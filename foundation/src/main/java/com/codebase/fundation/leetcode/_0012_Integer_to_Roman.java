@@ -1,8 +1,5 @@
 package com.codebase.fundation.leetcode;
 
-/**
- * Created by chengxiaojun on 16/10/20.
- */
 public class _0012_Integer_to_Roman {
 
     public String intToRoman(int num) {
