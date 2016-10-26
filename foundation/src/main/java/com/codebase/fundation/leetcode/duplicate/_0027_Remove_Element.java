@@ -1,4 +1,4 @@
-package com.codebase.fundation.leetcode;
+package com.codebase.fundation.leetcode.duplicate;
 
 public class _0027_Remove_Element {
 

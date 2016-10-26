@@ -1,4 +1,4 @@
-package com.codebase.fundation.leetcode;
+package com.codebase.fundation.leetcode.match;
 
 public class _0028_Implement_strStr {
 
