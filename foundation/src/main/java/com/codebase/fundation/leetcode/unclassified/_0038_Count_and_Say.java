@@ -1,4 +1,4 @@
-package com.codebase.fundation.leetcode;
+package com.codebase.fundation.leetcode.unclassified;
 
 import java.util.HashMap;
 import java.util.Map;

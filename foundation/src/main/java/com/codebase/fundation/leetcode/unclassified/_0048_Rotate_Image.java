@@ -1,4 +1,4 @@
-package com.codebase.fundation.leetcode;
+package com.codebase.fundation.leetcode.unclassified;
 
 public class _0048_Rotate_Image {
 

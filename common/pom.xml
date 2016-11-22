@@ -17,5 +17,11 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
         </dependency>
+        /*各种工具类,包括获取ppid*/
+        <dependency>
+            <groupId>com.github.jnr</groupId>
+            <artifactId>jnr-posix</artifactId>
+            <version>3.0.23</version>
+        </dependency>
     </dependencies>
 </project>

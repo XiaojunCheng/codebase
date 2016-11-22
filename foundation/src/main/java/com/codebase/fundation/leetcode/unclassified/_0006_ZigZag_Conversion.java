@@ -1,4 +1,4 @@
-package com.codebase.fundation.leetcode;
+package com.codebase.fundation.leetcode.unclassified;
 
 /**
  * 需要注意细节

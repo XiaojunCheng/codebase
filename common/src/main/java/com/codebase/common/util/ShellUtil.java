@@ -72,7 +72,7 @@ public class ShellUtil {
                         errorInfo.append(line);
                         errorInfo.append(System.getProperty("line.separator"));
                     }
-                } catch (IOException ioe) {
+                } catch (Exception ioe) {
                     LOGGER.warn("Error in reading error stream", ioe);
                 }
             }
@@ -148,6 +148,16 @@ public class ShellUtil {
         output = builder.toString();
     }
 
+    static Thread start(final Runnable task) {
+        return start(task, false);
+    }
+
+    static void start(final Runnable task, boolean daemon) {
+        final Thread thread = new Thread(task);
+        thread.setDaemon(daemon);
+        thread.start();
+        return thread;
+    }
 
     static class ExitCodeException extends IOException {
 
