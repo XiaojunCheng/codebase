@@ -152,7 +152,7 @@ public class ShellUtil {
         return start(task, false);
     }
 
-    static void start(final Runnable task, boolean daemon) {
+    static Thread start(final Runnable task, boolean daemon) {
         final Thread thread = new Thread(task);
         thread.setDaemon(daemon);
         thread.start();
