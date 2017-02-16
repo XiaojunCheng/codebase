@@ -1,4 +1,4 @@
-package com.codebase.framework.dubbo.spring.schema.bean;
+package com.codebase.framework.spring.schema.bean;
 
 /**
  * Created by chengxiaojun on 17/2/9.

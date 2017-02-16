@@ -1,7 +1,7 @@
-package com.codebase.framework.dubbo.spring.schema;
+package com.codebase.framework.spring.schema;
 
 
-import com.codebase.framework.dubbo.spring.schema.bean.Car;
+import com.codebase.framework.spring.schema.bean.Car;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.AbstractSingleBeanDefinitionParser;
 import org.springframework.util.StringUtils;

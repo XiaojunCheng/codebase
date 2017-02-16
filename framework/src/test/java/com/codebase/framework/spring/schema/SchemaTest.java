@@ -1,6 +1,6 @@
-package com.codebase.framework.dubbo.spring.schema;
+package com.codebase.framework.spring.schema;
 
-import com.codebase.framework.dubbo.spring.schema.bean.Car;
+import com.codebase.framework.spring.schema.bean.Car;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +30,7 @@ public class SchemaTest {
         float engine = car.getEngine();
         int horsePower = car.getHorsePower();
 
+        System.out.println(brand);
         assertEquals("Brand incorrect.Should be Ferrari.", "Ferrari", brand);
         assertEquals("Engine incorrect.Should be 4.5L.", 4.5, engine, 0.000001);
         assertEquals("HorsePower incorrect.Should be 605hp.", 605, horsePower);

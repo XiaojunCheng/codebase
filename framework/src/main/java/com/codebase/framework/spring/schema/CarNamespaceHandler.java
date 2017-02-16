@@ -1,4 +1,4 @@
-package com.codebase.framework.dubbo.spring.schema;
+package com.codebase.framework.spring.schema;
 
 import org.springframework.beans.factory.xml.NamespaceHandlerSupport;
 
