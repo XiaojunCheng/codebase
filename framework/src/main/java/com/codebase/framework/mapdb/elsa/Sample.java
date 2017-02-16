@@ -4,6 +4,8 @@ import org.mapdb.elsa.ElsaMaker;
 import org.mapdb.elsa.ElsaSerializerPojo;
 
 import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 
@@ -14,7 +16,10 @@ public class Sample {
 
     public static void main(String[] args) throws IOException {
         //some data to be serialized
-        String data = "Hello World";
+        //String data = "Hello World";
+        Struct data = new Struct();
+        data.value = "a";
+        data.map.put("key", "value");
 
         //construct Elsa serializer
         ElsaSerializerPojo serializer = new ElsaMaker().make();
@@ -28,8 +33,16 @@ public class Sample {
         //now deserialize data using DataInput
         DataInputStream in = new DataInputStream(new ByteArrayInputStream(out.toByteArray()));
 
-        String data2 = serializer.deserialize(in);
-        assertEquals(data, data2);
+        //String data2 = serializer.deserialize(in);
+        Struct data2 = serializer.deserialize(in);
+        assertEquals(data.value, data2.value);
+        assertEquals(data.map, data2.map);
+    }
+
+
+    static class Struct implements Serializable {
+        String value;
+        Map<String, String> map = new HashMap<>();
     }
 
 }

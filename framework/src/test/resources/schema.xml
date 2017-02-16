@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 	xmlns="http://www.springframework.org/schema/beans"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:def="http://def.com/schema/def"
+          xsi:schemaLocation="
+	        http://www.springframework.org/schema/beans
+	        http://www.springframework.org/schema/beans/spring-beans.xsd
+	        http://def.com/schema/def
+	        http://def.com/schema/def.xsd">
+
+    <def:car id="Ferrari458" brand="Ferrari" engine="4.5" horsePower="605" />
+
+</beans>

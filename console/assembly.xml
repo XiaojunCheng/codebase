@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly>
+	<id>console</id>
+	<baseDirectory>codebase-console.war</baseDirectory>
+	<formats>
+		<format>tgz</format>
+	</formats>
+	<includeBaseDirectory>true</includeBaseDirectory>
+	<fileSets>
+		<fileSet>
+			<directory>target/exploded/codebase-console.war</directory>
+			<includes>
+				<include>**</include>
+			</includes>
+			<outputDirectory>/</outputDirectory>
+		</fileSet>
+	</fileSets>
+</assembly>
