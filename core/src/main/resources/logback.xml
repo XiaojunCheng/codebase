@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<appender name="ROOT-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${log.root}/default.log</file>
+		<append>true</append>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${log.root}/default.log.%d{yyyy-MM-dd}</fileNamePattern>
+			<MaxHistory>7</MaxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d %p [%t] %c{20} %X{traceId:--} %m%n</pattern>
+			<charset class="java.nio.charset.Charset">UTF-8</charset>
+		</encoder>
+	</appender>
+
+	<appender name="core" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${log.root}/core.log</file>
+		<append>true</append>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${log.root}/core.log.%d{yyyy-MM-dd}</fileNamePattern>
+			<MaxHistory>7</MaxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d %p [%t] %c{20} %X{traceId:--} %m%n</pattern>
+			<charset class="java.nio.charset.Charset">UTF-8</charset>
+		</encoder>
+	</appender>
+
+	<root level="WARN">
+		<appender-ref ref="ROOT-APPENDER" />
+	</root>
+
+	<logger name="com.codebase.core" level="INFO" additivity="false">
+		<appender-ref ref="core"/>
+	</logger>
+</configuration>

@@ -1,0 +1,6 @@
+jar cvf bundleA.jar com/codebase/core/container/sample/A.class com/codebase/core/container/sample/Base.class
+mv bundleA.jar ../../../bundle/bundleA/lib
+##
+
+jar cvf bundleB.jar com/codebase/core/container/sample/B.class com/codebase/core/container/sample/Base.class com/codebase/core/container/sample/Export.class
+mv bundleB.jar ../../../bundle/bundleB/lib
