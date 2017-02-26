@@ -39,10 +39,6 @@ public class BundleContainer {
         bundles.clear();
     }
 
-    public Map<String, Bundle> getBundles() {
-        return bundles;
-    }
-
     private void loadBundles() {
 
         LOG.info("load bundles...");
@@ -60,9 +56,10 @@ public class BundleContainer {
         });
 
         for (File bundleDir : bundleDirs) {
+            LOG.info("start to load bundle {}", bundleDir.getName());
             Bundle bundle = loadBundle(bundleDir);
             if (bundle != null) {
-                LOG.info("load bundle {} done", bundle.getBundleName());
+                LOG.info("finish to load bundle {}", bundle.getBundleName());
                 bundles.put(bundle.getBundleName(), bundle);
             }
         }

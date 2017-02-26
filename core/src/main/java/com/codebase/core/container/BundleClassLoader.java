@@ -82,7 +82,6 @@ public class BundleClassLoader extends URLClassLoader {
                 return clazz;
             }
         } catch (ClassNotFoundException e) {
-            LOG.warn("find class {} error", className);
         }
 
         clazz = sharedClasses.get(className);
