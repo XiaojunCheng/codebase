@@ -1,0 +1,25 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+    <bean id="customerService" class="com.codebase.framework.spring.aop.CustomerService">
+        <property name="name" value="aop" />
+        <property name="url" value="github.com" />
+    </bean>
+
+    <bean id="hijackBeforeMethodBean" class="com.codebase.framework.spring.aop.HijackBeforeMethod" />
+    <bean id="hijackAfterMethodBean" class="com.codebase.framework.spring.aop.HijackAfterMethod" />
+    <bean id="hijackThrowExceptionBean" class="com.codebase.framework.spring.aop.HijackThrowException" />
+    <bean id="hijackAroundMethodBean" class="com.codebase.framework.spring.aop.HijackAroundMethod" />
+
+    <bean id="customerServiceProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="target" ref="customerService" />
+        <property name="interceptorNames">
+            <list>
+                <value>hijackAroundMethodBean</value>
+            </list>
+        </property>
+    </bean>
+
+</beans>
