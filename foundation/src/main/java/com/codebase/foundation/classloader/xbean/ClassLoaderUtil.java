@@ -28,7 +28,7 @@ import java.io.ObjectStreamClass;
  * Utility methods for class loader manipulation in a server environment.
  *
  * @author Dain Sundstrom
- * @version $Id: com.codebase.foundation.classload.util.ClassLoaderUtil.java 813161 2009-09-09 23:03:32Z djencks $
+ * @version $Id: ClassLoaderUtil.java 813161 2009-09-09 23:03:32Z djencks $
  * @since 2.0
  */
 public final class ClassLoaderUtil {

@@ -1,4 +1,4 @@
-package com.codebase.foundation.classload.util;
+package com.codebase.foundation.classloader.util;
 
 import java.io.File;
 import java.net.URI;

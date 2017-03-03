@@ -1,0 +1,13 @@
+1. 切换目录
+    cd foundation/target/classes
+2. 打包
+    jar cvf instrumentation.jar com/codebase/foundation/instrumentation/Main.class com/codebase/foundation/instrumentation/TransformerClass.class
+3. 添加META-INF/MANIFEST.MF文件,文件内容
+    Manifest-Version: 1.0
+    Premain-Class: com.codebase.foundation.instrumentation.Agent
+4. 然后修改TransformerClass方法实现后重新编译并打包
+    mv com/codebase/foundation/instrumentation/TransformerClass.class com/codebase/foundation/instrumentation/TransformerClass.class.2
+    jar cvfm instrumentation_agent.jar META-INF/MANIFEST.MF com/codebase/foundation/instrumentation/TransformerClass.class.2 com/codebase/foundation/instrumentation/Transformer.class com/codebase/foundation/instrumentation/Agent.class
+5. 运行
+    java -cp instrumentation.jar com.codebase.foundation.instrumentation.Main
+    java -javaagent:instrumentation_agent.jar -cp instrumentation.jar com.codebase.foundation.instrumentation.Main

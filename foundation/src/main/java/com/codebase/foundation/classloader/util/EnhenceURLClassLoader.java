@@ -1,4 +1,4 @@
-package com.codebase.foundation.classload.util;
+package com.codebase.foundation.classloader.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

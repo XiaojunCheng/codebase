@@ -1,9 +1,8 @@
 package com.codebase.foundation.jmx;
 
-import java.lang.management.ManagementFactory;
-
 import javax.management.MBeanServer;
 import javax.management.ObjectName;
+import java.lang.management.ManagementFactory;
 
 /**
  * Java Management Extensions, introduced in j2se 5.0 release
