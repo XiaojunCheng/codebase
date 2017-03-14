@@ -6,7 +6,8 @@ package com.codebase.foundation.instrumentation;
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println(new TransformerClass().getDateTime());
+        Service service = new Service();
+        System.out.println(service.getServiceName());
     }
 
 }

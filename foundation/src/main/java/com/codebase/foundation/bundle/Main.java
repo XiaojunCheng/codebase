@@ -9,13 +9,13 @@ import java.util.ResourceBundle;
 public class Main {
 
     public static void main(String[] args) {
-        final String LSTRING_FILE = "com.codebase.foundation.bundle.LocalStrings";
+        final String LOCAL_STRING_FILE = "com.codebase.foundation.bundle.LocalStrings";
 
-        ResourceBundle lStrings = ResourceBundle.getBundle(LSTRING_FILE, new Locale("en", "US"));
+        ResourceBundle lStrings = ResourceBundle.getBundle(LOCAL_STRING_FILE, new Locale("en", "US"));
         System.out.println(lStrings.getString("error.spaceIsFull"));
         System.out.println(lStrings.getString("error.noPermission"));
 
-        ResourceBundle lStrings2 = ResourceBundle.getBundle(LSTRING_FILE);
+        ResourceBundle lStrings2 = ResourceBundle.getBundle(LOCAL_STRING_FILE);
         System.out.println(lStrings2.getString("error.spaceIsFull"));
         System.out.println(lStrings2.getString("error.noPermission"));
     }

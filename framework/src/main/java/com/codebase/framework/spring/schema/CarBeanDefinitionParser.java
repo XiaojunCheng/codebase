@@ -1,6 +1,5 @@
 package com.codebase.framework.spring.schema;
 
-
 import com.codebase.framework.spring.schema.bean.Car;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.AbstractSingleBeanDefinitionParser;
@@ -8,7 +7,7 @@ import org.springframework.util.StringUtils;
 import org.w3c.dom.Element;
 
 /**
- * Created by chengxiaojun on 17/2/9.
+ * created by cheng.xiaojun.seu@gmail.com on 17/2/9.
  */
 public class CarBeanDefinitionParser extends AbstractSingleBeanDefinitionParser {
 

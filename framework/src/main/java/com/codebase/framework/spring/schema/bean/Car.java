@@ -1,7 +1,7 @@
 package com.codebase.framework.spring.schema.bean;
 
 /**
- * Created by chengxiaojun on 17/2/9.
+ * created by cheng.xiaojun.seu@gmail.com on 17/2/9.
  */
 public class Car {
 
