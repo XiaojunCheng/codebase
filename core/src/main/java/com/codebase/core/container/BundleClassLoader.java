@@ -32,49 +32,31 @@ public class BundleClassLoader extends URLClassLoader {
         this.sharedClasses = sharedClasses;
     }
 
-//    @Override
-//    public Class<?> loadClass(String className) throws ClassNotFoundException {
-//
-//        Class clazz = super.findLoadedClass(className);
-//        if (clazz != null) {
-//            LOG.info("load {} by call findLoadedClass", className);
-//            return clazz;
-//        }
-//
-//        ClassLoader classLoader = ClassLoader.getSystemClassLoader();
-//        if (classLoader == null) {
-//            LOG.warn("SystemClassLoader is null");
-//            throw new ClassNotFoundException("SystemClassLoader is null");
-//        }
-//
-//        try {
-//            clazz = classLoader.loadClass(className);
-//            if (clazz != null) {
-//                LOG.info("load {} by call SystemClassLoader.loadClass", className);
-//                return clazz;
-//            }
-//        } catch (ClassNotFoundException e) {
-//        }
-//
-//        clazz = super.findClass(className);
-//        if (clazz != null) {
-//            LOG.info("load {} by call findClass", className);
-//            return clazz;
-//        }
-//
-//        clazz = sharedClasses.get(className);
-//        if (clazz != null) {
-//            LOG.info("load {} by call sharedClasses.get", className);
-//            return clazz;
-//        }
-//        LOG.warn("not found class {}", className);
-//        throw new ClassNotFoundException(className);
-//    }
-
     @Override
-    protected Class<?> findClass(String className) throws ClassNotFoundException {
+    public Class<?> loadClass(String className) throws ClassNotFoundException {
 
-        Class<?> clazz;
+        Class clazz = super.findLoadedClass(className);
+        if (clazz != null) {
+            LOG.info("load {} by call findLoadedClass", className);
+            return clazz;
+        }
+
+        ClassLoader classLoader = ClassLoader.getSystemClassLoader();
+        if (classLoader == null) {
+            LOG.warn("SystemClassLoader is null");
+            throw new ClassNotFoundException("SystemClassLoader is null");
+        }
+
+        try {
+            clazz = classLoader.loadClass(className);
+            if (clazz != null) {
+                LOG.info("load {} by call SystemClassLoader.loadClass", className);
+                return clazz;
+            }
+        } catch (ClassNotFoundException e) {
+            LOG.warn("SystemClassLoader.loadClass error");
+        }
+
         try {
             clazz = super.findClass(className);
             if (clazz != null) {
@@ -82,6 +64,7 @@ public class BundleClassLoader extends URLClassLoader {
                 return clazz;
             }
         } catch (ClassNotFoundException e) {
+            LOG.warn("super.loadClass error");
         }
 
         clazz = sharedClasses.get(className);
@@ -92,6 +75,28 @@ public class BundleClassLoader extends URLClassLoader {
         LOG.warn("not found class {}", className);
         throw new ClassNotFoundException(className);
     }
+
+//    @Override
+//    protected Class<?> findClass(String className) throws ClassNotFoundException {
+//
+//        Class<?> clazz;
+//        try {
+//            clazz = super.findClass(className);
+//            if (clazz != null) {
+//                LOG.info("load {} by call findClass", className);
+//                return clazz;
+//            }
+//        } catch (ClassNotFoundException e) {
+//        }
+//
+//        clazz = sharedClasses.get(className);
+//        if (clazz != null) {
+//            LOG.info("load {} by call sharedClasses.get", className);
+//            return clazz;
+//        }
+//        LOG.warn("not found class {}", className);
+//        throw new ClassNotFoundException(className);
+//    }
 
     private static URL[] loadJars(File workspace) throws MalformedURLException {
         File libDir = new File(workspace.getAbsoluteFile() + "/lib");
@@ -142,10 +147,10 @@ public class BundleClassLoader extends URLClassLoader {
     public static void main(String[] args) throws ClassNotFoundException, IOException, InterruptedException {
         File bundleDir = new File("bundle/bundleB");
         for (URL u : BundleClassLoader.loadJars(bundleDir)) {
-            System.err.println(u);
+            System.out.println(u);
         }
         BundleClassLoader loader = new BundleClassLoader(bundleDir, null);
-        System.out.println(loader.loadClass("com.codebase.core.container.samplea.B"));
+        System.out.println(loader.loadClass("com.codebase.core.container.sample.B"));
         loader.close();
     }
 }

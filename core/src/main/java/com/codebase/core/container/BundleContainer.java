@@ -41,7 +41,7 @@ public class BundleContainer {
 
     private void loadBundles() {
 
-        LOG.info("load bundles...");
+        LOG.info("====================== load bundles... ======================");
 
         File root = new File(BUNDLE_PATH);
         if (!root.exists()) {
@@ -56,10 +56,10 @@ public class BundleContainer {
         });
 
         for (File bundleDir : bundleDirs) {
-            LOG.info("start to load bundle {}", bundleDir.getName());
+            LOG.info("@ start to load bundle {}", bundleDir.getName());
             Bundle bundle = loadBundle(bundleDir);
             if (bundle != null) {
-                LOG.info("finish to load bundle {}", bundle.getBundleName());
+                LOG.info("@ finish to load bundle {}", bundle.getBundleName());
                 bundles.put(bundle.getBundleName(), bundle);
             }
         }
@@ -76,7 +76,7 @@ public class BundleContainer {
     }
 
     private void startBundles() {
-        LOG.info("start all bundles");
+        LOG.info("====================== start all bundles ======================");
         for (Bundle bundle : bundles.values()) {
             BundleContext context = new BundleContext();
             context.setName(bundle.getBundleName());
@@ -85,7 +85,7 @@ public class BundleContainer {
     }
 
     private void stopBundles() {
-        LOG.info("stop all bundles");
+        LOG.info("====================== stop all bundles ======================");
         for (Bundle bundle : bundles.values()) {
             BundleContext context = new BundleContext();
             context.setName(bundle.getBundleName());

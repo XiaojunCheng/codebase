@@ -3,7 +3,7 @@ package com.codebase.core.container.samplea;
 import com.codebase.core.container.BundleContext;
 import com.codebase.core.container.BundleInitializer;
 
-public class B implements BundleInitializer{
+public class B implements BundleInitializer {
 
     static {
         System.out.println("====" + B.class.getSimpleName() + "====");

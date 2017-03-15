@@ -23,17 +23,20 @@ public class Bundle {
     }
 
     public void start(BundleContext context) {
+
+        LOG.info("@ start to init bundle {}", bundleName);
+
         if (initClass == null || initClass.isEmpty()) {
-            LOG.info("bundle {} has no init class", bundleName);
+            LOG.info("@ bundle {} has no init class", bundleName);
             return;
         }
         try {
             Class<?> clazz = classLoader.loadClass(initClass);
             initializer = (BundleInitializer) clazz.newInstance();
             initializer.start(context);
-            LOG.info("bundle {} start done", bundleName);
+            LOG.info("@ finished to init bundle {}", bundleName);
         } catch (Exception e) {
-            LOG.warn("bundle {} init failed {}", bundleName, e);
+            LOG.warn("@ init bundle {} failed", bundleName, e);
         }
     }
 
@@ -49,21 +52,21 @@ public class Bundle {
 
     public static Bundle create(File bundleDir, String bundleName, SharedClassList sharedClasses, BundleConf conf) throws MalformedURLException {
         BundleClassLoader loader = new BundleClassLoader(bundleDir, sharedClasses);
-        List<String> exports = conf.getExportClassNames();
-        if (exports != null) {
-            LOG.info("load exported classes for {}", bundleName);
-            loadExports(loader, sharedClasses, exports);
+        List<String> sharedClassNames = conf.getSharedClassNames();
+        if (sharedClassNames != null) {
+            loadSharedClasses(loader, sharedClasses, sharedClassNames);
         }
         return new Bundle(bundleName, conf.getInitClassName(), loader);
     }
 
-    private static void loadExports(ClassLoader loader, SharedClassList sharedClasses, List<String> exports) {
+    private static void loadSharedClasses(ClassLoader loader, SharedClassList sharedClasses, List<String> exports) {
         for (String className : exports) {
+            LOG.info("load shared classes {}", className);
             try {
                 Class<?> clazz = loader.loadClass(className);
                 sharedClasses.put(className, clazz);
             } catch (ClassNotFoundException e) {
-                LOG.warn("load class {} failed", className, e);
+                LOG.warn("load shared class {} failed", className, e);
             }
         }
     }

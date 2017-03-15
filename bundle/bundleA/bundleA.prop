@@ -1,1 +1,1 @@
-export-class=com.codebase.core.container.sample.A
+shared-class=com.codebase.core.container.sample.A

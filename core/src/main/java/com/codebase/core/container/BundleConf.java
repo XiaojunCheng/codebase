@@ -14,10 +14,10 @@ import java.util.Properties;
 public class BundleConf {
 
     private static final String KEY_INIT = "init";
-    private static final String KEY_EXPORT_CLASS = "export-class";
+    private static final String KEY_EXPORT_CLASS = "shared-class";
     private static final String KEY_IMPORT_CLASS = "import-class";
 
-    private List<String> exportClassNames;
+    private List<String> sharedClassNames;
     private List<String> importClassNames;
     private String initClassName;
 
@@ -30,8 +30,8 @@ public class BundleConf {
         load(configFile);
     }
 
-    public List<String> getExportClassNames() {
-        return exportClassNames;
+    public List<String> getSharedClassNames() {
+        return sharedClassNames;
     }
 
     public List<String> getImportClassNames() {
@@ -50,7 +50,7 @@ public class BundleConf {
             throw new IllegalArgumentException("load bundle config file " + configFile.getAbsolutePath() + "failed");
         }
         initClassName = properties.getProperty(KEY_INIT);
-        exportClassNames = parseList(KEY_EXPORT_CLASS, properties);
+        sharedClassNames = parseList(KEY_EXPORT_CLASS, properties);
         importClassNames = parseList(KEY_IMPORT_CLASS, properties);
     }
 

@@ -1,2 +1,2 @@
 init=com.codebase.core.container.sample.B
-export-class=com.codebase.core.container.sample.Export
+shared-class=com.codebase.core.container.sample.Export
