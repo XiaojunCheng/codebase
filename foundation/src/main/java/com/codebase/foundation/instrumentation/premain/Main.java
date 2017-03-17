@@ -1,4 +1,4 @@
-package com.codebase.foundation.instrumentation;
+package com.codebase.foundation.instrumentation.premain;
 
 /**
  * created by cheng.xiaojun.seu@gmail.com on 17/3/2.

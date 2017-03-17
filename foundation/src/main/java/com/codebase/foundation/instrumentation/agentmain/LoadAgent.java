@@ -1,4 +1,4 @@
-package com.codebase.foundation.agent;
+package com.codebase.foundation.instrumentation.agentmain;
 
 import java.lang.instrument.Instrumentation;
 
@@ -8,7 +8,7 @@ import java.lang.instrument.Instrumentation;
  */
 public class LoadAgent {
 
-    //jar cvfm agent.jar META-INF/MANIFEST.MF com/codebase/foundation/agent/LoadAgent.class
+    //jar cvfm agent.jar META-INF/MANIFEST.MF com/codebase/foundation/instrumentation/agentmain/LoadAgent.class
     public static void agentmain(String args, Instrumentation inst) {
         System.out.println("args: " + args);
         Class[] classes = inst.getAllLoadedClasses();
