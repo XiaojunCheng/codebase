@@ -26,7 +26,7 @@ public class ScriptEngineManagerMain {
         engine.eval("def getTime(){return date;}", binding);
         engine.eval("def sayHello(name,age){return 'Hello,I am ' + name + ', age' + age;}");
 
-        Date time = (Date) ((Invocable) engine).invokeFunction("getTime", null);
+        Date time = (Date) ((Invocable) engine).invokeFunction("getTime");
         System.out.println(time);
 
         String message = (String) ((Invocable) engine).invokeFunction("sayHello", "zhangsan", new Integer(12));

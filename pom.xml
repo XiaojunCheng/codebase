@@ -23,31 +23,45 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.version>4.1.2.RELEASE</spring.version>
+        <slf4j-api.version>1.7.12</slf4j-api.version>
+        <logback-classic.version>1.1.7</logback-classic.version>
+        <junit.version>4.11</junit.version>
+        <netty-all.version>4.0.24.Final</netty-all.version>
+        <fastjson.version>1.2.7</fastjson.version>
+        <jnr-posix.version>3.0.32</jnr-posix.version>
+        <jetty-version>6.1.26</jetty-version>
+        <asm-all.version>4.0</asm-all.version>
+        <!-- zookeeper -->
+        <zookeeper.version>3.4.6</zookeeper.version>
+        <curator-recipes.version>2.10.0</curator-recipes.version>
+        <zkclient.version>0.7</zkclient.version>
+        <!-- database -->
+        <mysql-connector-java.version>5.1.21</mysql-connector-java.version>
+        <mybatis-spring.version>1.1.1</mybatis-spring.version>
+        <mybatis.version>3.1.1</mybatis.version>
+
+        <io.dropwizard.metrics.version>3.1.0</io.dropwizard.metrics.version>
+        <groovy-all.version>2.4.8</groovy-all.version>
+        <joda-time.version>2.9.7</joda-time.version>
+        <hessian.version>4.0.7</hessian.version>
+        <dubbo.version>2.5.3</dubbo.version>
+        <org.aspectj.version>1.6.8</org.aspectj.version>
+        <elsa.version>3.0.0-M6</elsa.version>
+        <aws-java-sdk.version>1.10.68</aws-java-sdk.version>
+        <sparkey.version>2.1.3</sparkey.version>
+        <paldb.version>1.2.0</paldb.version>
     </properties>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>1.7.12</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.curator</groupId>
-                <artifactId>curator-recipes</artifactId>
-                <version>2.10.0</version>
-            </dependency>
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>fastjson</artifactId>
-                <version>1.2.7</version>
-            </dependency>
-            <dependency>
-                <groupId>org.mortbay.jetty</groupId>
-                <artifactId>jetty</artifactId>
-                <version>6.1.26</version>
-            </dependency>
-
-        </dependencies>
-    </dependencyManagement>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

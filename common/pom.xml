@@ -16,12 +16,15 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
+            <version>${slf4j-api.version}</version>
         </dependency>
-        /*各种工具类,包括获取ppid*/
+
+        <!-- 各种工具类,包括获取ppid -->
         <dependency>
             <groupId>com.github.jnr</groupId>
             <artifactId>jnr-posix</artifactId>
-            <version>3.0.23</version>
+            <version>${jnr-posix.version}</version>
         </dependency>
     </dependencies>
+
 </project>
