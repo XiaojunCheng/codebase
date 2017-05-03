@@ -19,4 +19,9 @@
         </environment>
     </environments>
 
+
+    <mappers>
+        <mapper resource="mybatis/sqlmap/BlogMapper.xml"/>
+    </mappers>
+
 </configuration>

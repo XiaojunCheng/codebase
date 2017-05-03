@@ -26,6 +26,7 @@
         <slf4j-api.version>1.7.12</slf4j-api.version>
         <logback-classic.version>1.1.7</logback-classic.version>
         <junit.version>4.11</junit.version>
+        <testng.version>6.10</testng.version>
         <netty-all.version>4.0.24.Final</netty-all.version>
         <fastjson.version>1.2.7</fastjson.version>
         <jnr-posix.version>3.0.32</jnr-posix.version>
@@ -39,6 +40,7 @@
         <mysql-connector-java.version>5.1.21</mysql-connector-java.version>
         <mybatis-spring.version>1.1.1</mybatis-spring.version>
         <mybatis.version>3.1.1</mybatis.version>
+        <druid.version>1.0.28</druid.version>
 
         <io.dropwizard.metrics.version>3.1.0</io.dropwizard.metrics.version>
         <groovy-all.version>2.4.8</groovy-all.version>
@@ -50,6 +52,7 @@
         <aws-java-sdk.version>1.10.68</aws-java-sdk.version>
         <sparkey.version>2.1.3</sparkey.version>
         <paldb.version>1.2.0</paldb.version>
+        <lombok.version>1.16.2</lombok.version>
     </properties>
 
     <build>
