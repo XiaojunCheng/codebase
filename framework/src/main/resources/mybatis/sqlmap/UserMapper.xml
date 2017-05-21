@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.codebase.framework.mybatis.dao.UserDAO">
+
+    <resultMap id="userMap" type="com.codebase.framework.mybatis.dataobject.UserDO">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="age" property="age"/>
+        <result column="address" property="address"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, name, age, address
+    </sql>
+
+    <insert id="batchInsert" useGeneratedKeys="true">
+        insert into user (name, age, address)
+        values
+        <foreach item="user" collection="list" separator=",">
+            (#{user.name}, #{user.age}, #{user.address})
+        </foreach>
+    </insert>
+
+    <select id="getAll" resultMap="userMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+    </select>
+
+    <select id="getAllById" parameterType="java.lang.Long" resultMap="userMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user where id = #{id}
+    </select>
+</mapper>

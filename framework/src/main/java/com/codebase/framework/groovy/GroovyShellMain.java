@@ -24,7 +24,7 @@ public class GroovyShellMain {
                 + "\tString name;"
                 + "\tInteger age;"
                 + "\n"
-                //.append("User(String name,Integer age){this.name = name;this.age = age};")
+                //.append("UserDO(String name,Integer age){this.name = name;this.age = age};")
                 + "\tString sayHello() { "
                 + "\t\treturn 'Hello,I am ' + name + ', age ' + age;"
                 + "\t}"

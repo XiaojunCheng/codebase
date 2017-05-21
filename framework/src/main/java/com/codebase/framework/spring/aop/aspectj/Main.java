@@ -1,10 +1,14 @@
 package com.codebase.framework.spring.aop.aspectj;
 
 import com.codebase.framework.spring.aop.CustomerService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Main {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) {
 
@@ -12,19 +16,22 @@ public class Main {
 
         CustomerService service = (CustomerService) appContext.getBean("customerService");
 
-        System.out.println("===========================");
+        LOGGER.info("===========================");
         service.printName();
-        System.out.println("===========================");
+
+        LOGGER.info("===========================");
+
         service.printUrl();
-        System.out.println("===========================");
+        LOGGER.info("===========================");
+
         try {
             service.printThrowException();
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage(), e);
         }
-        System.out.println("===========================");
-        service.printAround("hello");
 
+        LOGGER.info("===========================");
+        service.printAround("hello");
     }
 
 }

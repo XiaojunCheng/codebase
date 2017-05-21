@@ -1,12 +1,13 @@
 package com.codebase.framework.mybatis;
 
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import com.codebase.framework.mybatis.dao.UserDAO;
+import com.codebase.framework.mybatis.dataobject.UserDO;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.IOException;
-import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Xiaojun.Cheng
@@ -16,17 +17,38 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        String resource = "mybatis/mybatis-config.xml";
-        InputStream inputStream = Resources.getResourceAsStream(resource);
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        ApplicationContext appContext = new ClassPathXmlApplicationContext(new String[]{"mybatis/dao.xml"});
 
-        SqlSession session = sqlSessionFactory.openSession();
-        try {
-            Blog blog = session.selectOne("org.mybatis.example.BlogMapper.selectBlog", 101);
-            System.out.println(blog.toString());
-        } finally {
-            session.close();
+        UserDAO userDAO = (UserDAO) appContext.getBean("userDao");
+
+        List<UserDO> userDOs = userDAO.getAll();
+        System.out.println("first query size: " + userDOs.size());
+
+        int batchSize = 20;
+        for (int batchId = 1; batchId <= 100; batchId++) {
+
+            try {
+                Thread.sleep(10 * 1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            List<UserDO> users = new ArrayList<>(batchSize);
+            for (int i = 0; i < batchSize; i++) {
+                int id = batchId * batchSize + i;
+                UserDO user = new UserDO();
+                user.setName("user-" + id);
+                user.setAge(id);
+                user.setAddress("address-" + id);
+                users.add(user);
+            }
+            int size = userDAO.batchInsert(users);
+            System.out.println("batch insert size: " + size);
+
+            List<UserDO> queryUsers = userDAO.getAll();
+            System.out.println("query size: " + queryUsers.size());
         }
+
     }
 
 }

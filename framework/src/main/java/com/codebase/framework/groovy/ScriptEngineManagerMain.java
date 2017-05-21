@@ -24,12 +24,12 @@ public class ScriptEngineManagerMain {
         binding.put("date", new Date());
 
         engine.eval("def getTime(){return date;}", binding);
-        engine.eval("def sayHello(name,age){return 'Hello,I am ' + name + ', age' + age;}");
+        engine.eval("def say(name,age){return 'Hello,I am ' + name + ', age' + age;}");
 
         Date time = (Date) ((Invocable) engine).invokeFunction("getTime");
         System.out.println(time);
 
-        String message = (String) ((Invocable) engine).invokeFunction("sayHello", "zhangsan", new Integer(12));
+        String message = (String) ((Invocable) engine).invokeFunction("say", "zhangsan", new Integer(12));
         System.out.println(message);
     }
 

@@ -1,7 +1,5 @@
 package com.codebase.framework.btrace;
 
-import java.util.Date;
-
 /**
  * @author cheng.xiaojun.seu@gmail.com
  * @date 17/3/16
@@ -9,14 +7,14 @@ import java.util.Date;
 public class Main {
 
     public static void main(String[] args) throws InterruptedException {
+        final SayHello sayHello = new SayHelloImpl();
+        final TaskExecutor executor = new TaskExecutor();
         while (true) {
-            print();
+            executor.run(() -> {
+                sayHello.say();
+            });
             Thread.sleep(5000);
         }
-    }
-
-    static void print() {
-        System.out.println("@ " + new Date());
     }
 
 }
