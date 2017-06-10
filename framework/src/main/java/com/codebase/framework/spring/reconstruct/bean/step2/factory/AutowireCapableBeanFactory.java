@@ -1,6 +1,8 @@
-package com.codebase.framework.spring.reconstruct.bean.step2;
+package com.codebase.framework.spring.reconstruct.bean.step2.factory;
 
 import com.codebase.framework.spring.reconstruct.bean.BeanCreateException;
+import com.codebase.framework.spring.reconstruct.bean.step2.BeanDefinition;
+import com.codebase.framework.spring.reconstruct.bean.step2.PropertyValues;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;

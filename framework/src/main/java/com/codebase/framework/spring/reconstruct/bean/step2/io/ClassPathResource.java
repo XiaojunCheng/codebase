@@ -20,11 +20,6 @@ public class ClassPathResource implements Resource {
     }
 
     @Override
-    public boolean exists() {
-        return (resolveURL() != null);
-    }
-
-    @Override
     public URL getURL() throws IOException {
         return resolveURL();
     }

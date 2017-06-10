@@ -1,4 +1,6 @@
-package com.codebase.framework.spring.reconstruct.bean.step2;
+package com.codebase.framework.spring.reconstruct.bean.step2.factory;
+
+import com.codebase.framework.spring.reconstruct.bean.step2.BeanDefinition;
 
 import java.util.HashMap;
 import java.util.Map;
