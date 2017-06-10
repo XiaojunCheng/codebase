@@ -1,4 +1,4 @@
-package com.codebase.framework.spring.reconstruct.bean;
+package com.codebase.framework.spring.reconstruct;
 
 import lombok.Data;
 

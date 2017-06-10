@@ -1,6 +1,6 @@
 package com.codebase.framework.spring.reconstruct.bean.step2;
 
-import com.codebase.framework.spring.reconstruct.bean.SayHelloService;
+import com.codebase.framework.spring.reconstruct.SayHelloService;
 import com.codebase.framework.spring.reconstruct.bean.step2.factory.AutowireCapableBeanFactory;
 import com.codebase.framework.spring.reconstruct.bean.step2.factory.BeanFactory;
 import com.codebase.framework.spring.reconstruct.bean.step2.xml.ClassPathXmlResourceLoader;
