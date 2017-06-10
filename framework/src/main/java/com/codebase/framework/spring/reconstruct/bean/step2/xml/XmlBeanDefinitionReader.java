@@ -1,11 +1,9 @@
 package com.codebase.framework.spring.reconstruct.bean.step2.xml;
 
 
+import com.codebase.common.util.StringUtil;
 import com.codebase.framework.spring.reconstruct.bean.BeanDefinitionParseException;
-import com.codebase.framework.spring.reconstruct.bean.step2.AbstractBeanDefinitionReader;
-import com.codebase.framework.spring.reconstruct.bean.step2.BeanDefinition;
-import com.codebase.framework.spring.reconstruct.bean.step2.PropertyValue;
-import com.codebase.framework.spring.reconstruct.bean.step2.PropertyValues;
+import com.codebase.framework.spring.reconstruct.bean.step2.*;
 import com.codebase.framework.spring.reconstruct.bean.step2.io.Resource;
 import com.codebase.framework.spring.reconstruct.bean.step2.io.ResourceLoader;
 import org.w3c.dom.Document;
@@ -111,7 +109,15 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
             Element propertyElement = (Element) propertyList.item(index);
             String name = propertyElement.getAttribute("name");
             String value = propertyElement.getAttribute("value");
-            propertyValues.add(new PropertyValue(name, value));
+            if (StringUtil.isNotEmpty(value)) {
+                propertyValues.add(new PropertyValue(name, value));
+                continue;
+            }
+
+            String ref = propertyElement.getAttribute("ref");
+            BeanReference beanReference = new BeanReference();
+            beanReference.setRef(ref);
+            propertyValues.add(new PropertyValue(name, beanReference));
         }
         definition.setPropertyValues(propertyValues);
     }

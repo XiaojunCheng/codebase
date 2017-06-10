@@ -10,9 +10,13 @@ import lombok.Data;
 public class SayHelloServiceImpl implements SayHelloService {
 
     private String name;
+    private OutputService outputService;
 
     @Override
     public void sayHello() {
-        System.out.println("hello! by " + name);
+        System.out.println("=========== before sayHello");
+        System.out.println("hello! by " + name + ", class: " + outputService.getClass().getName());
+        outputService.output();
+        System.out.println("=========== after sayHello");
     }
 }

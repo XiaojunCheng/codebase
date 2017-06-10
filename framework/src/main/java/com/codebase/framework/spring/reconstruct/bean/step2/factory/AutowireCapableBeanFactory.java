@@ -2,10 +2,11 @@ package com.codebase.framework.spring.reconstruct.bean.step2.factory;
 
 import com.codebase.framework.spring.reconstruct.bean.BeanCreateException;
 import com.codebase.framework.spring.reconstruct.bean.step2.BeanDefinition;
+import com.codebase.framework.spring.reconstruct.bean.step2.BeanReference;
+import com.codebase.framework.spring.reconstruct.bean.step2.PropertyValue;
 import com.codebase.framework.spring.reconstruct.bean.step2.PropertyValues;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
 
 /**
  * @author Xiaojun.Cheng
@@ -16,26 +17,32 @@ public class AutowireCapableBeanFactory extends AbstractBeanFactory {
     @Override
     public Object doCreateBean(BeanDefinition beanDefinition) {
         Object bean = createBean(beanDefinition);
+        beanDefinition.setBean(bean);
         applyPropertyValues(bean, beanDefinition);
         return bean;
     }
 
     private void applyPropertyValues(Object bean, BeanDefinition beanDefinition) {
-        PropertyValues propertyValues = beanDefinition.getPropertyValues();
-        Field[] fields = beanDefinition.getBeanClass().getDeclaredFields();
-        for (Field field : fields) {
-            int modifiers = field.getModifiers();
-            String name = field.getName();
-            if (Modifier.isStatic(modifiers) || !propertyValues.contains(name)) {
-                continue;
-            }
+        try {
+            PropertyValues propertyValues = beanDefinition.getPropertyValues();
+            Field[] fields = beanDefinition.getBeanClass().getDeclaredFields();
+            for (Field field : fields) {
+                String name = field.getName();
+                if (!propertyValues.contains(name)) {
+                    continue;
+                }
 
-            field.setAccessible(true);
-            try {
-                field.set(bean, propertyValues.getPropertyValue(name).getValue());
-            } catch (IllegalAccessException e) {
-                throw new BeanCreateException("field illegal access: " + name, e);
+                PropertyValue propertyValue = propertyValues.getPropertyValue(name);
+                Object value = propertyValue.getValue();
+                if (value instanceof BeanReference) {
+                    BeanReference beanReference = (BeanReference) value;
+                    value = getBean(beanReference.getRef());
+                }
+                field.setAccessible(true);
+                field.set(bean, value);
             }
+        } catch (IllegalAccessException e) {
+            throw new BeanCreateException(beanDefinition.getName(), e);
         }
     }
 

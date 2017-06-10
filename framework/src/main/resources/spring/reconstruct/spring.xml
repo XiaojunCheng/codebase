@@ -5,6 +5,11 @@
 
     <bean id="sayHelloService" class="com.codebase.framework.spring.reconstruct.bean.SayHelloServiceImpl">
         <property name="name" value="anybody"/>
+        <property name="outputService" ref="outputService"/>
+    </bean>
+
+    <bean id="outputService" class="com.codebase.framework.spring.reconstruct.bean.OutputServiceImpl">
+        <property name="sayHelloService" ref="sayHelloService"/>
     </bean>
 
 </beans>
