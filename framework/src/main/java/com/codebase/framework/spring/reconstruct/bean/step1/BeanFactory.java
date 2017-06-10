@@ -1,4 +1,4 @@
-package com.codebase.framework.spring.reconstruct.step1;
+package com.codebase.framework.spring.reconstruct.bean.step1;
 
 import java.util.HashMap;
 import java.util.Map;

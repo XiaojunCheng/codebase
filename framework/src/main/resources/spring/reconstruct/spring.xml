@@ -3,7 +3,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
-    <bean id="sayHelloService" class="com.codebase.framework.spring.reconstruct.SayHelloServiceImpl">
+    <bean id="sayHelloService" class="com.codebase.framework.spring.reconstruct.bean.SayHelloServiceImpl">
         <property name="name" value="anybody"/>
     </bean>
 

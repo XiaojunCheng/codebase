@@ -1,4 +1,6 @@
-package com.codebase.framework.spring.reconstruct.step2;
+package com.codebase.framework.spring.reconstruct.bean.step2;
+
+import com.codebase.framework.spring.reconstruct.bean.BeanCreateException;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -30,7 +32,7 @@ public class AutowireCapableBeanFactory extends AbstractBeanFactory {
             try {
                 field.set(bean, propertyValues.getPropertyValue(name).getValue());
             } catch (IllegalAccessException e) {
-                throw new BeanInitialException("field illegal access: " + name, e);
+                throw new BeanCreateException("field illegal access: " + name, e);
             }
         }
     }
@@ -42,11 +44,11 @@ public class AutowireCapableBeanFactory extends AbstractBeanFactory {
             beanDefinition.setBeanClass(clazz);
             return clazz.newInstance();
         } catch (InstantiationException e) {
-            throw new BeanInitialException("class instantiation error: " + beanClassName, e);
+            throw new BeanCreateException("class instantiation error: " + beanClassName, e);
         } catch (IllegalAccessException e) {
-            throw new BeanInitialException("class illegal access: " + beanClassName, e);
+            throw new BeanCreateException("class illegal access: " + beanClassName, e);
         } catch (ClassNotFoundException e) {
-            throw new BeanInitialException("class not found: " + beanClassName, e);
+            throw new BeanCreateException("class not found: " + beanClassName, e);
         }
     }
 }

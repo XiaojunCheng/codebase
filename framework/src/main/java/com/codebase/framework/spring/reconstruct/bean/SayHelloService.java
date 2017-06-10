@@ -1,4 +1,4 @@
-package com.codebase.framework.spring.reconstruct;
+package com.codebase.framework.spring.reconstruct.bean;
 
 /**
  * @author Xiaojun.Cheng
