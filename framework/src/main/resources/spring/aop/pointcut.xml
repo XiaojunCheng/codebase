@@ -1,0 +1,32 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd ">
+
+    <bean id="customerService" class="com.codebase.framework.spring.aop.advanced.CustomerService">
+        <property name="name" value="aop" />
+        <property name="url" value="git.com" />
+    </bean>
+
+    <!--<bean id="hijackBeforeMethodBeanAdvise" class="com.codebase.framework.spring.aop.BeforeAdvice" />-->
+    <!--<bean id="hijackAfterMethodBeanAdvise" class="com.codebase.framework.spring.aop.AfterAdvice" />-->
+    <!--<bean id="hijackThrowExceptionBeanAdvise" class="com.codebase.framework.spring.aop.ThrowExceptionAdvice" />-->
+    <!--<bean id="hijackAroundMethodBeanAdvice" class="com.codebase.framework.spring.aop.AroundAdvice" />-->
+
+    <bean id="customerPointcut" class="org.springframework.aop.support.NameMatchMethodPointcut">
+        <property name="mappedName" value="printName" />
+    </bean>
+
+    <bean id="customerServiceProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="target" ref="customerService" />
+        <property name="interceptorNames">
+            <list>
+                <value>customerAdvisor</value>
+            </list>
+        </property>
+    </bean>
+
+</beans>

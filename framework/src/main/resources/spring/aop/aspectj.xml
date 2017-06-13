@@ -1,0 +1,40 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+    <aop:aspectj-autoproxy/>
+
+    <context:component-scan base-package="com.codebase.framework.spring.aop.introduction"/>
+
+    <bean id="customerService" class="com.codebase.framework.spring.aop.advanced.CustomerService">
+        <property name="name" value="google"/>
+        <property name="url" value="www.google.com"/>
+    </bean>
+
+    <bean id="throwExceptionAdvice" class="com.codebase.framework.spring.aop.advanced.advice.ThrowExceptionAdvice"/>
+    <bean id="aroundAdvice" class="com.codebase.framework.spring.aop.advanced.advice.AroundAdvice"/>
+
+    <bean id="customerAdvisor" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+        <property name="mappedName" value="getUserName"/>
+        <property name="advice" ref="aroundAdvice"/>
+    </bean>
+
+    <bean id="customerServiceProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="target" ref="customerService"/>
+        <property name="interceptorNames">
+            <list>
+                <value>throwExceptionAdvice</value>
+                <value>customerAdvisor</value>
+            </list>
+        </property>
+    </bean>
+
+
+</beans>
