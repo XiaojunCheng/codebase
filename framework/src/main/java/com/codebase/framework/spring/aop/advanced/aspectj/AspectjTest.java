@@ -24,6 +24,8 @@ public class AspectjTest {
         } catch (Exception e) {
             //ignore
         }
+
+        service.printAround();
     }
 
 }

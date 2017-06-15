@@ -11,19 +11,21 @@
 
     <aop:aspectj-autoproxy/>
 
-    <context:component-scan base-package="com.codebase.framework.spring.aop.introduction"/>
+    <context:component-scan base-package="com.codebase.framework.spring.aop.advanced"/>
 
     <bean id="customerService" class="com.codebase.framework.spring.aop.advanced.CustomerService">
         <property name="name" value="google"/>
         <property name="url" value="www.google.com"/>
     </bean>
 
-    <bean id="throwExceptionAdvice" class="com.codebase.framework.spring.aop.advanced.advice.ThrowExceptionAdvice"/>
-    <bean id="aroundAdvice" class="com.codebase.framework.spring.aop.advanced.advice.AroundAdvice"/>
-
     <bean id="customerAdvisor" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
         <property name="mappedName" value="getUserName"/>
         <property name="advice" ref="aroundAdvice"/>
+    </bean>
+
+    <bean id="throwExceptionAdvisor" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+        <property name="mappedName" value="printThrowException"/>
+        <property name="advice" ref="throwExceptionAdvice"/>
     </bean>
 
     <bean id="customerServiceProxy" class="org.springframework.aop.framework.ProxyFactoryBean">

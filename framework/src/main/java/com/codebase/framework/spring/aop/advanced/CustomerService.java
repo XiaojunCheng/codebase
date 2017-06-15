@@ -25,4 +25,8 @@ public class CustomerService {
     public void printThrowException() {
         throw new IllegalArgumentException("error");
     }
+
+    public void printAround() {
+        System.out.println("print around!");
+    }
 }
