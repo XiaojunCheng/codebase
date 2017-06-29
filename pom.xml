@@ -31,7 +31,6 @@
         <fastjson.version>1.2.7</fastjson.version>
         <jnr-posix.version>3.0.32</jnr-posix.version>
         <jetty-version>6.1.26</jetty-version>
-        <asm-all.version>4.0</asm-all.version>
         <!-- zookeeper -->
         <zookeeper.version>3.4.6</zookeeper.version>
         <curator-recipes.version>2.10.0</curator-recipes.version>

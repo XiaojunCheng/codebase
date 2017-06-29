@@ -19,9 +19,9 @@ import java.util.concurrent.Executors;
  * @author Xiaojun.Cheng
  * @date 2017/5/23
  */
-public class Main {
+public class HystrixTest {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(HystrixTest.class);
 
     public static void main(String[] args) throws InterruptedException {
         initMonitor();
@@ -190,11 +190,11 @@ public class Main {
             LOGGER.info("======================================== metric@" + new Date());
             dashboardData.getCommandMetrics().
                     forEach((HystrixCommandMetrics commandMetric) -> {
-                        HystrixMetricsInitializingBean.processCommandMetric(commandMetric);
+                        MetricsCollector.processCommandMetric(commandMetric);
                     });
 
             dashboardData.getThreadPoolMetrics().forEach((HystrixThreadPoolMetrics threadPoolMetric) -> {
-                HystrixMetricsInitializingBean.processThreadPoolMetric(threadPoolMetric);
+                MetricsCollector.processThreadPoolMetric(threadPoolMetric);
             });
         });
     }
