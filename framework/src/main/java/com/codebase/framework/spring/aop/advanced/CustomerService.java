@@ -29,4 +29,10 @@ public class CustomerService {
     public void printAround() {
         System.out.println("print around!");
     }
+
+    @MethodAnnotation(actionType = MethodActionType.QUERY)
+    public void printAnnotation() {
+        System.out.println("annotation");
+    }
+
 }

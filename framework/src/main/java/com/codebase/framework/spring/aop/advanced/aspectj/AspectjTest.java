@@ -26,6 +26,8 @@ public class AspectjTest {
         }
 
         service.printAround();
+
+        service.printAnnotation();
     }
 
 }

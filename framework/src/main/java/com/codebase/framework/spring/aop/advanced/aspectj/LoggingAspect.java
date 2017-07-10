@@ -1,10 +1,14 @@
 package com.codebase.framework.spring.aop.advanced.aspectj;
 
+import com.codebase.framework.spring.aop.advanced.MethodActionType;
+import com.codebase.framework.spring.aop.advanced.MethodAnnotation;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 
+import java.lang.reflect.Method;
 import java.util.Arrays;
 
 @Component
@@ -37,6 +41,23 @@ public class LoggingAspect {
 
     @Around("execution(* com.codebase.framework.spring.aop.advanced.CustomerService.printAround(..))")
     public void logAround(ProceedingJoinPoint joinPoint) throws Throwable {
+        System.out.println("logAround method: " + joinPoint.getSignature().getName() + ", arguments: " + Arrays.toString(joinPoint.getArgs()));
+        System.out.println("logAround before");
+        joinPoint.proceed();
+        System.out.println("logAround after");
+    }
+
+    @Around("@annotation(com.codebase.framework.spring.aop.advanced.MethodAnnotation)")
+    public void logAroundAnnotation(ProceedingJoinPoint joinPoint) throws Throwable {
+        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+        String method = signature.getName();
+
+        Method callMethod = signature.getMethod();
+        MethodAnnotation methodAnnotation = callMethod.getAnnotation(MethodAnnotation.class);
+        MethodActionType actionType = methodAnnotation.actionType() == null ? MethodActionType.OPERATE : methodAnnotation.actionType();
+        System.out.println(actionType);
+
+        System.out.println("logAround method: " + method + ", arguments: " + Arrays.toString(joinPoint.getArgs()));
         System.out.println("logAround method: " + joinPoint.getSignature().getName() + ", arguments: " + Arrays.toString(joinPoint.getArgs()));
         System.out.println("logAround before");
         joinPoint.proceed();

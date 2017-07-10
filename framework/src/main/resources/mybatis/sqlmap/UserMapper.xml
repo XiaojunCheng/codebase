@@ -16,11 +16,11 @@
         id, name, age, address
     </sql>
 
-    <insert id="batchInsert" useGeneratedKeys="true">
+    <insert id="batchInsert" useGeneratedKeys="true" keyProperty="id">
         insert into user (name, age, address)
         values
-        <foreach item="user" collection="list" separator=",">
-            (#{user.name}, #{user.age}, #{user.address})
+        <foreach item="item" collection="list" separator=",">
+            (#{item.name}, #{item.age}, #{item.address})
         </foreach>
     </insert>
 

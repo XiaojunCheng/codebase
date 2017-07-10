@@ -24,31 +24,24 @@ public class Main {
         List<UserDO> userDOs = userDAO.getAll();
         System.out.println("first query size: " + userDOs.size());
 
-        int batchSize = 20;
-        for (int batchId = 1; batchId <= 100; batchId++) {
-
-            try {
-                Thread.sleep(10 * 1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            List<UserDO> users = new ArrayList<>(batchSize);
-            for (int i = 0; i < batchSize; i++) {
-                int id = batchId * batchSize + i;
-                UserDO user = new UserDO();
-                user.setName("user-" + id);
-                user.setAge(id);
-                user.setAddress("address-" + id);
-                users.add(user);
-            }
-            int size = userDAO.batchInsert(users);
-            System.out.println("batch insert size: " + size);
-
-            List<UserDO> queryUsers = userDAO.getAll();
-            System.out.println("query size: " + queryUsers.size());
+        int batchSize = 5;
+        List<UserDO> users = new ArrayList<>(batchSize);
+        for (int id = 0; id < batchSize; id++) {
+            UserDO user = new UserDO();
+            user.setId(Long.valueOf(id * 10 + 1));
+            user.setName("user-" + id);
+            user.setAge(id);
+            user.setAddress("address-" + id);
+            users.add(user);
         }
+        int size = userDAO.batchInsert(users);
+        System.out.println("batch insert size: " + size);
 
+        List<UserDO> queryUsers = userDAO.getAll();
+        System.out.println("query size: " + queryUsers.size());
+        for (UserDO user : queryUsers) {
+            System.out.println(user.getId() + ", " + user.getName());
+        }
     }
 
 }

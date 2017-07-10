@@ -37,7 +37,7 @@ public class GroupTest {
     }
 
     // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
+    // The methods must be annotated with printAnnotation @Test. For example:
     //
     // @Test
     // public void hello() {}
