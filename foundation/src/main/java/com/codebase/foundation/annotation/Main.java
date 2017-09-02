@@ -14,11 +14,11 @@ public class Main {
         boolean flag = book.getClass().isAnnotationPresent(Description.class);
 
         if (flag) {
-            Description description = (Description) book.getClass().getAnnotation(Description.class);
+            Description description = book.getClass().getAnnotation(Description.class);
             System.out.println("Description--->" + description.value());
             for (Method method : methods) {
                 if (method.isAnnotationPresent(Author.class)) {
-                    Author author = (Author) method.getAnnotation(Author.class);
+                    Author author = method.getAnnotation(Author.class);
                     System.out.println("Author--->" + author.name() + " from " + author.group());
                 }
             }

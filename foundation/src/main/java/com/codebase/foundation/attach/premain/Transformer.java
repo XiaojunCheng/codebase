@@ -1,4 +1,4 @@
-package com.codebase.foundation.instrumentation.premain;
+package com.codebase.foundation.attach.premain;
 
 import java.lang.instrument.ClassFileTransformer;
 import java.lang.instrument.IllegalClassFormatException;

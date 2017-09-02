@@ -1,4 +1,4 @@
-package com.codebase.foundation.instrumentation.agentmain;
+package com.codebase.foundation.attach.agentmain;
 
 import java.lang.instrument.Instrumentation;
 

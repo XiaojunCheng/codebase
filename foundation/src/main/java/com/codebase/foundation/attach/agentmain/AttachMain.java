@@ -1,4 +1,4 @@
-package com.codebase.foundation.instrumentation.agentmain;
+package com.codebase.foundation.attach.agentmain;
 
 import com.sun.tools.attach.AgentInitializationException;
 import com.sun.tools.attach.AgentLoadException;

@@ -2,7 +2,7 @@
     cd foundation/target/classes
 2. 添加META-INF/MANIFEST.MF文件,文件内容
     Manifest-Version: 1.0
-    Premain-Class: com.codebase.foundation.instrumentation.premain.Agent
+    Premain-Class: com.codebase.foundation.attach.premain.Agent
 3. 打包
     jar cvf instrumentation.jar com/codebase/foundation/instrumentation/premain/Main.class com/codebase/foundation/instrumentation/premain/Service.class
     mv instrumentation.jar ..
@@ -10,5 +10,5 @@
     mv instrumentation_agent.jar ..
 4. 运行
     cd ..
-    java -cp instrumentation.jar com.codebase.foundation.instrumentation.premain.Main
-    java -javaagent:instrumentation_agent.jar -cp instrumentation.jar com.codebase.foundation.instrumentation.premain.Main
+    java -cp instrumentation.jar com.codebase.foundation.attach.premain.Main
+    java -javaagent:instrumentation_agent.jar -cp instrumentation.jar com.codebase.foundation.attach.premain.Main
