@@ -47,7 +47,7 @@
         <groovy-all.version>2.4.8</groovy-all.version>
         <joda-time.version>2.9.7</joda-time.version>
         <hessian.version>4.0.7</hessian.version>
-        <dubbo.version>2.5.3</dubbo.version>
+        <dubbo.version>3.1.0-RELEASE</dubbo.version>
         <org.aspectj.version>1.6.8</org.aspectj.version>
         <elsa.version>3.0.0-M6</elsa.version>
         <aws-java-sdk.version>1.10.68</aws-java-sdk.version>

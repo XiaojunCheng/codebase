@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Premain-Class: com.codebase.foundation.attach.premain.Agent
+
+Agent-Class: com.codebase.foundation.attach.agentmain.LoadAgent

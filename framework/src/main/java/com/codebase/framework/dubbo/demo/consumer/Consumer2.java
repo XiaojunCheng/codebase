@@ -4,7 +4,6 @@ import com.alibaba.dubbo.config.ApplicationConfig;
 import com.alibaba.dubbo.config.ModuleConfig;
 import com.alibaba.dubbo.config.ReferenceConfig;
 import com.codebase.framework.dubbo.demo.DemoService;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * Created by chengxiaojun on 17/2/13.
