@@ -13,13 +13,13 @@ import com.amazonaws.util.StringUtils;
 import java.io.File;
 import java.util.List;
 
-public class VdianS3UploadDriver {
+public class S3UploadDriver {
 
     public static void main(String[] args) {
-        final String bucketName = "vdianmq";
-        final String accessKey = "MR64FSOGXC3F0Z050695";
-        final String secretKey = "4q3qRhnPyB3YHUAfGeBRddMb8kYcAaWpE4uHVcW0";
-        final String endPoint = "http://s3.idcvdian.com";
+        final String bucketName = "bucket";
+        final String accessKey = "assessKey";
+        final String secretKey = "secretKey";
+        final String endPoint = "http://s3.idc.com";
 
         AWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
         ClientConfiguration clientConfig = new ClientConfiguration();
@@ -39,8 +39,8 @@ public class VdianS3UploadDriver {
         createBucket(s3Client, bucketName);
         listBuckets(s3Client);
 
-        File file = new File("/Users/koudai213/Documents/4. Weidian/4.5.1 vdianmq相关文档/2. 设计相关/消息过滤架构图.png");
-        String uploadFileName = "vdianmq-" + file.getName();
+        File file = new File("架构图.png");
+        String uploadFileName = "q-" + file.getName();
         uploadFileToBucket(s3Client, bucketName, uploadFileName, file);
 //
         deleteFileFromBucket(s3Client, bucketName, uploadFileName);
@@ -61,7 +61,7 @@ public class VdianS3UploadDriver {
     }
 
     private static void uploadFileToBucket(AmazonS3 s3Client, String bucketName, String fileName, File file) {
-        PutObjectResult result = s3Client.putObject(bucketName, "vdianmq-" + file.getName(), file);
+        PutObjectResult result = s3Client.putObject(bucketName, "q-" + file.getName(), file);
         ObjectMetadata metadata = result.getMetadata();
         System.out.println("upload\t" + result.getVersionId() + "\t" + result.getExpirationTime() + "\t" +
                 metadata.getStorageClass());

@@ -14,4 +14,6 @@
     <dubbo:reference id="demoService" interface="com.codebase.framework.dubbo.demo.DemoService"
                      check="false" mock="true" timeout="3000"/>
 
+    <bean id="instantiationAwareBeanPostProcessor" class="com.codebase.framework.dubbo.demo.consumer.MyInstantiationAwareBeanPostProcessor">
+    </bean>
 </beans>

@@ -17,11 +17,11 @@ public class AttachMain {
 
     public static void main(String[] args) throws IOException, AttachNotSupportedException, AgentLoadException, AgentInitializationException, InterruptedException {
 
-        String pid = "12281";
+        String pid = args[0];
         VirtualMachine vm = VirtualMachine.attach(pid);
 
         System.out.println("loading..." + new Date());
-        File file = new File("/Users/koudai213/Documents/Workspace/GithubRepository/codebase/foundation/target/agent.jar");
+        File file = new File("agent.jar");
         System.out.println(file.exists());
         vm.loadAgent(file.getAbsolutePath());
         System.out.println("load ok" + new Date());

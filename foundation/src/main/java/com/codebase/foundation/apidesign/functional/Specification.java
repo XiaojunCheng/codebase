@@ -1,4 +1,4 @@
-package com.codebase.foundation.apidesign.v2;
+package com.codebase.foundation.apidesign.functional;
 
 /**
  * @author Xiaojun.Cheng
@@ -6,6 +6,6 @@ package com.codebase.foundation.apidesign.v2;
  */
 public interface Specification<T> {
 
-    boolean test(T item);
+    boolean satisfiedBy(T item);
 
 }

@@ -1,4 +1,4 @@
-package com.codebase.foundation.apidesign.v1;
+package com.codebase.foundation.apidesign.io.v1;
 
 import java.io.*;
 
@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         File source = new File(Main.class.getResource("/MANIFEST.MF").getFile());
-        File destination = File.createTempFile("test", ".txt");
+        File destination = File.createTempFile("satisfiedBy", ".txt");
         destination.deleteOnExit();
         BufferedReader reader = new BufferedReader(new FileReader(source));
         long count = 0;

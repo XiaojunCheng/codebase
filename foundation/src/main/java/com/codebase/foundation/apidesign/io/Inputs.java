@@ -1,4 +1,4 @@
-package com.codebase.foundation.apidesign.v2;
+package com.codebase.foundation.apidesign.io;
 
 import java.io.*;
 

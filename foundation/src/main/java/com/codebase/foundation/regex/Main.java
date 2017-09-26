@@ -13,10 +13,10 @@ public class Main {
 
     public static void main(String[] args) {
         String ip = "1.2.3.4";
-        String ip1 = "1.2.3.4,test";
+        String ip1 = "1.2.3.4,satisfiedBy";
         String ip2 = "1.2.3.4,1.2.3.4";
-        String ip3 = "test";
-        String ip4 = "test,1.2.3.4";
+        String ip3 = "satisfiedBy";
+        String ip4 = "satisfiedBy,1.2.3.4";
         System.out.println(ip + "\t" + isIp(ip));
         System.out.println(ip1 + "\t" + isIp(ip1));
         System.out.println(ip2 + "\t" + isIp(ip2));
