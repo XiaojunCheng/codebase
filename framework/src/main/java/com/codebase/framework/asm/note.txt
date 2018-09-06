@@ -1,0 +1,6 @@
+core: event-based
+tree: object-based
+
+The object based API is built on top of the event based one
+
+producer -> filter -> consumer

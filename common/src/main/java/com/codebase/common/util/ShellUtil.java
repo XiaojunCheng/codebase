@@ -23,12 +23,16 @@ public class ShellUtil {
         return exec.getOutput();
     }
 
-    // 命令 & 相关配置
+    /**
+     * 命令 & 相关配置
+     */
     private final String[] command;
     private File workDir;
     private Map<String, String> environment;
 
-    // 执行过程相关
+    /**
+     * 执行过程相关
+     */
     private Process process;
     private int exitCode;
     private String output = StringUtil.EMPTY;
@@ -52,7 +56,8 @@ public class ShellUtil {
     }
 
     public void execute() throws IOException {
-        exitCode = 0; //reset
+        //rest
+        exitCode = 0;
         executeCommand();
     }
 

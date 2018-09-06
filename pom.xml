@@ -24,7 +24,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.version>4.1.2.RELEASE</spring.version>
         <slf4j-api.version>1.7.12</slf4j-api.version>
-        <logback-classic.version>1.1.7</logback-classic.version>
+        <logback.version>1.1.7</logback.version>
         <junit.version>4.11</junit.version>
         <testng.version>6.10</testng.version>
         <netty-all.version>4.0.24.Final</netty-all.version>

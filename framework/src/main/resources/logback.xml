@@ -1,48 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-    <appender name="ROOT-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.root}/default.log</file>
-        <append>true</append>
-        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-            <fileNamePattern>${log.root}/default.log.%i
-            </fileNamePattern>
-            <minIndex>1</minIndex>
-            <maxIndex>5</maxIndex>
-        </rollingPolicy>
-        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-            <maxFileSize>100MB</maxFileSize>
-        </triggeringPolicy>
+    <property name="log.root" value="logs"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d %p [%t] %c{20} %X{traceId:--} %m%n</pattern>
-            <charset class="java.nio.charset.Charset">UTF-8</charset>
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
         </encoder>
     </appender>
 
-    <appender name="framework" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.root}/framework.log</file>
-        <append>true</append>
-        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-            <fileNamePattern>${log.root}/framework.log.%i
-            </fileNamePattern>
-            <minIndex>1</minIndex>
-            <maxIndex>5</maxIndex>
-        </rollingPolicy>
-        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-            <maxFileSize>400MB</maxFileSize>
-        </triggeringPolicy>
-        <encoder>
-            <pattern>%d %p [%t] %c{20} %X{traceId:--} %m%n</pattern>
-            <charset class="java.nio.charset.Charset">UTF-8</charset>
-        </encoder>
-    </appender>
+    <!--<appender name="ROOT-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+        <!--<file>${log.root}/default.log</file>-->
+        <!--<append>true</append>-->
+        <!--<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">-->
+            <!--<fileNamePattern>${log.root}/default.log.%i-->
+            <!--</fileNamePattern>-->
+            <!--<minIndex>1</minIndex>-->
+            <!--<maxIndex>5</maxIndex>-->
+        <!--</rollingPolicy>-->
+        <!--<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">-->
+            <!--<maxFileSize>100MB</maxFileSize>-->
+        <!--</triggeringPolicy>-->
+        <!--<encoder>-->
+            <!--<pattern>%d %p [%t] %c{20} %X{traceId:&#45;&#45;} %m%n</pattern>-->
+            <!--<charset class="java.nio.charset.Charset">UTF-8</charset>-->
+        <!--</encoder>-->
+    <!--</appender>-->
 
-    <root level="WARN">
-        <appender-ref ref="ROOT-APPENDER"/>
+    <!--<appender name="framework" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+        <!--<file>${log.root}/framework.log</file>-->
+        <!--<append>true</append>-->
+        <!--<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">-->
+            <!--<fileNamePattern>${log.root}/framework.log.%i-->
+            <!--</fileNamePattern>-->
+            <!--<minIndex>1</minIndex>-->
+            <!--<maxIndex>5</maxIndex>-->
+        <!--</rollingPolicy>-->
+        <!--<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">-->
+            <!--<maxFileSize>400MB</maxFileSize>-->
+        <!--</triggeringPolicy>-->
+        <!--<encoder>-->
+            <!--<pattern>%d %p [%t] %c{20} %X{traceId:&#45;&#45;} %m%n</pattern>-->
+            <!--<charset class="java.nio.charset.Charset">UTF-8</charset>-->
+        <!--</encoder>-->
+    <!--</appender>-->
+
+    <root level="INFO">
+        <!--<appender-ref ref="ROOT-APPENDER"/>-->
+        <appender-ref ref="STDOUT"/>
     </root>
 
-    <logger name="com.codebase.framework" level="INFO" additivity="false">
-        <appender-ref ref="framework"/>
-    </logger>
+    <!--<logger name="com.codebase.framework" level="INFO" additivity="false">-->
+        <!--<appender-ref ref="framework"/>-->
+    <!--</logger>-->
 
 </configuration>
