@@ -35,6 +35,15 @@ public class ClassPrinter extends ClassVisitor {
         }
     }
 
+    @Override
+    public void visitSource(final String source, final String debug) {
+        log.info("================= > visitSource");
+        log.info("source: {}, debug: {}", source, debug);
+        if (cv != null) {
+            cv.visitSource(source, debug);
+        }
+    }
+
     public static void main(String[] args) throws IOException {
         String className = "java.lang.Runnable";
 

@@ -1,10 +1,14 @@
 package com.codebase.framework.asm.core.write;
 
 import lombok.extern.slf4j.Slf4j;
+import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.Type;
+import org.objectweb.asm.util.TraceClassVisitor;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.reflect.Method;
 
 import static org.apache.commons.io.FileUtils.writeByteArrayToFile;
@@ -24,7 +28,16 @@ public class HelloWorldClassWriter {
 
         writeByteCode2ClassFile(className, classBytes);
 
+        printHumanReadableText(classBytes);
+
         useGenerateClass(className, classBytes);
+    }
+
+    private static void printHumanReadableText(byte[] classBytes) {
+        ClassReader cr = new ClassReader(classBytes);
+        ClassWriter cw = new ClassWriter(cr, 0);
+        TraceClassVisitor cv = new TraceClassVisitor(cw, new PrintWriter(System.out));
+        cr.accept(cv, 0);
     }
 
     private static void useGenerateClass(String className, byte[] classBytes) {
@@ -64,11 +77,11 @@ public class HelloWorldClassWriter {
                 new String[]{"java/lang/Runnable"});
 
         //定义字段
-        cw.visitField(ACC_PUBLIC + ACC_FINAL + ACC_STATIC, "LESS", "I",
+        cw.visitField(ACC_PUBLIC + ACC_FINAL + ACC_STATIC, "LESS", Type.getType(int.class).getDescriptor(),
                 null, new Integer(-1)).visitEnd();
-        cw.visitField(ACC_PUBLIC + ACC_FINAL + ACC_STATIC, "TAG", "Ljava/lang/String;",
+        cw.visitField(ACC_PUBLIC + ACC_FINAL + ACC_STATIC, "TAG", Type.getType(String.class).getDescriptor(),
                 null, "nx").visitEnd();
-        cw.visitField(ACC_PUBLIC + ACC_FINAL + ACC_STATIC, "GREATER", "I",
+        cw.visitField(ACC_PUBLIC + ACC_FINAL + ACC_STATIC, "GREATER", Type.getType(int.class).getDescriptor(),
                 null, new Integer(1)).visitEnd();
 
         //方法定义
@@ -85,9 +98,8 @@ public class HelloWorldClassWriter {
      *     int LESS = -1;
      *     String TAG = "nx";
      *     int GREATER = 1;
-     * 
+     *
      *     void sayHello();
      * }
      */
-
 }
