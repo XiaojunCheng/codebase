@@ -9,7 +9,7 @@ public class AspectjTest {
 
     @Test
     public void test() {
-        ApplicationContext appContext = new ClassPathXmlApplicationContext(new String[]{"spring/aop/aspectj.xml"});
+        ApplicationContext appContext = new ClassPathXmlApplicationContext(new String[]{"aop/spring/aspectj.xml"});
         CustomerService service = (CustomerService) appContext.getBean("customerService");
 
         System.out.println("======= getUserName");

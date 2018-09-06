@@ -1,6 +1,8 @@
 package com.codebase.framework.jodatime;
 
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.util.Date;
 
@@ -22,6 +24,10 @@ public class Main {
         System.out.println("minuteOfHour: " + dateTime.getMinuteOfHour());
         System.out.println("secondOfDay: " + dateTime.getSecondOfDay());
         System.out.println("secondOfMinute: " + dateTime.getSecondOfMinute());
+
+        DateTime dateTime2 = new DateTime(System.currentTimeMillis());
+        DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("yyyyMMdd");
+        System.out.println(dateTime2.toString(dateTimeFormatter));
     }
 
 }

@@ -16,7 +16,7 @@ public class BeanFactoryTest {
 
         //1. 加载bean配置
         XmlBeanDefinitionReader beanDefinitionReader = new XmlBeanDefinitionReader(new ClassPathXmlResourceLoader());
-        beanDefinitionReader.loadBeanDefinitions("spring/reconstruct/spring.xml");
+        beanDefinitionReader.loadBeanDefinitions("aop/reconstruct/spring.xml");
 
         //2. 初始化bean工厂
         BeanFactory beanFactory = new AutowireCapableBeanFactory();

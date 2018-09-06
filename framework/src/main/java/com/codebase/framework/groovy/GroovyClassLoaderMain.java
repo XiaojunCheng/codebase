@@ -4,8 +4,6 @@ import groovy.lang.GroovyClassLoader;
 import groovy.lang.GroovyCodeSource;
 import groovy.lang.GroovyObject;
 
-import java.io.File;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.Date;
 

@@ -9,7 +9,7 @@ import com.codebase.framework.spring.reconstruct.SayHelloService;
 public class ApplicationContextTest {
 
     public static void main(String[] args) {
-        ApplicationContext context = new ClassPathXmlApplicationContext("spring/reconstruct/spring.xml");
+        ApplicationContext context = new ClassPathXmlApplicationContext("aop/reconstruct/spring.xml");
         SayHelloService service = (SayHelloService) context.getBean("sayHelloService");
         service.sayHello();
     }

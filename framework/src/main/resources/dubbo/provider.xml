@@ -27,9 +27,4 @@
 
     <!--<bean id="dubboChecker" class="com.codebase.framework.dubbo.demo.provider.DubboChecker"/>-->
 
-    <bean class="com.youzan.replay.client.ReplayAspect" init-method="init" destroy-method="close">
-        <property name="appName" value="codebase" />
-        <property name="env" value="dev"/>
-    </bean>
-
 </beans>

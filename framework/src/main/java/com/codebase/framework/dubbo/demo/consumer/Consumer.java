@@ -14,14 +14,18 @@ public class Consumer {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"dubbo/consumer.xml"});
         context.start();
 
-        DemoService demoService = (DemoService) context.getBean("demoService"); // 获取远程服务代理
+        //获取远程服务代理
+        DemoService demoService = (DemoService) context.getBean("demoService");
         System.out.println("type: " + demoService.getClass());
 
         System.out.println("consumer start: " + new Date());
-        String hello = demoService.sayHello("world"); // 执行远程方法
+
+        //执行远程方法
+        String hello = demoService.showDemo(null);
         System.out.println("consumer end: " + new Date());
 
-        System.out.println(hello); // 显示调用结果
+        //显示调用结果
+        System.out.println(hello);
         context.destroy();
     }
 }

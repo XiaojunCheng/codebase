@@ -1,17 +1,20 @@
 package com.codebase.framework.dubbo.demo.provider;
 
+import com.alibaba.fastjson.JSON;
+import com.codebase.framework.dubbo.demo.MockParam;
 import com.codebase.framework.dubbo.demo.MockService;
-import com.youzan.replay.client.Replay;
 
 /**
- * Created by chengxiaojun on 17/2/15.
+ * @author chengxiaojun
+ * @date 17/2/15
  */
 public class MockServiceImpl implements MockService {
 
-    @Replay
     @Override
-    public String mock(String name) {
-        return "mock-" + name;
+    public String mock(MockParam param) {
+        String result = JSON.toJSONString(param);
+        System.out.println(result);
+        return result;
     }
 
 }

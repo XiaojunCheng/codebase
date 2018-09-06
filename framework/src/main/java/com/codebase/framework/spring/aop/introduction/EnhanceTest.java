@@ -1,9 +1,6 @@
 package com.codebase.framework.spring.aop.introduction;
 
 import com.codebase.framework.spring.aop.introduction.advice.*;
-import com.codebase.framework.spring.aop.introduction.proxy.CglibDynamicProxy;
-import com.codebase.framework.spring.aop.introduction.proxy.JdkDynamicProxy;
-import com.codebase.framework.spring.aop.introduction.proxy.StaticProxy;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.aop.framework.ProxyFactory;
@@ -15,24 +12,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @date 2017/6/13
  */
 public class EnhanceTest {
-
-    @Test
-    public void testStaticProxy() {
-        Greeting greeting = new StaticProxy(new GreetingImpl());
-        greeting.sayHello("mike");
-    }
-
-    @Test
-    public void testJdkProxy() {
-        Greeting greeting = new JdkDynamicProxy(new GreetingImpl()).getProxy();
-        greeting.sayHello("mike");
-    }
-
-    @Test
-    public void testCglibProxy() {
-        Greeting greeting = new CglibDynamicProxy().getProxy(GreetingImpl.class);
-        greeting.sayHello("mike");
-    }
 
     @Test
     public void testBeforeAndAfterAdvice() {
@@ -82,7 +61,7 @@ public class EnhanceTest {
 
     @Test
     public void testAnnotation() {
-        ApplicationContext context = new ClassPathXmlApplicationContext("spring/aop/enhance.xml"); // 获取 Spring Context
+        ApplicationContext context = new ClassPathXmlApplicationContext("aop/spring/enhance.xml"); // 获取 Spring Context
         Greeting greeting = (Greeting) context.getBean("greetingProxy");                        // 从 Context 中根据 id 获取 Bean 对象（其实就是一个代理）
         greeting.sayHello("Jack");
     }

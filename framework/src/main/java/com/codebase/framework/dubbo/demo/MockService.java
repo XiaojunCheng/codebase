@@ -6,6 +6,12 @@ package com.codebase.framework.dubbo.demo;
  */
 public interface MockService {
 
-    String mock(String src);
+    /**
+     * mock
+     *
+     * @param param
+     * @return
+     */
+    String mock(MockParam param);
 
 }

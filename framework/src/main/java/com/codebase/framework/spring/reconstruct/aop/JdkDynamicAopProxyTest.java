@@ -7,7 +7,7 @@ import com.codebase.framework.spring.reconstruct.context.ClassPathXmlApplication
 public class JdkDynamicAopProxyTest {
 
 	public static void main(String[] args) {
-		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring/reconstruct/spring.xml");
+		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("aop/reconstruct/spring.xml");
 		SayHelloService sayHelloService = (SayHelloService) applicationContext.getBean("sayHelloService");
 		sayHelloService.sayHello();
 

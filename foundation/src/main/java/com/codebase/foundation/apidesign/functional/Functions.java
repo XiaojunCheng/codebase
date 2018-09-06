@@ -7,7 +7,7 @@ package com.codebase.foundation.apidesign.functional;
  */
 public class Functions {
 
-    static class Counter implements Function<String, String> {
+    public static class Counter implements Function<String, String> {
 
         private int count;
 
