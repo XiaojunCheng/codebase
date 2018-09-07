@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Type;
+import org.objectweb.asm.util.CheckClassAdapter;
 import org.objectweb.asm.util.TraceClassVisitor;
 
 import java.io.File;
@@ -37,7 +38,8 @@ public class HelloWorldClassWriter {
         ClassReader cr = new ClassReader(classBytes);
         ClassWriter cw = new ClassWriter(cr, 0);
         TraceClassVisitor cv = new TraceClassVisitor(cw, new PrintWriter(System.out));
-        cr.accept(cv, 0);
+        CheckClassAdapter ccv = new CheckClassAdapter(cv);
+        cr.accept(ccv, 0);
     }
 
     private static void useGenerateClass(String className, byte[] classBytes) {
