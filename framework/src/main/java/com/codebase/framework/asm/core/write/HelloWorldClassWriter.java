@@ -34,7 +34,7 @@ public class HelloWorldClassWriter {
         useGenerateClass(className, classBytes);
     }
 
-    private static void printHumanReadableText(byte[] classBytes) {
+    public static void printHumanReadableText(byte[] classBytes) {
         ClassReader cr = new ClassReader(classBytes);
         ClassWriter cw = new ClassWriter(cr, 0);
         TraceClassVisitor cv = new TraceClassVisitor(cw, new PrintWriter(System.out));

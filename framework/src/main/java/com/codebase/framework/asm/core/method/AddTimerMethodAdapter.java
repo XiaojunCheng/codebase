@@ -1,6 +1,8 @@
 package com.codebase.framework.asm.core.method;
 
+import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
 
 import static org.objectweb.asm.Opcodes.*;
 
@@ -13,6 +15,10 @@ public class AddTimerMethodAdapter extends MethodVisitor {
     private final MethodVisitor mv;
     private final String owner;
 
+    private final Label tryStartLabel = new Label();
+    private final Label tryEndLabel = new Label();
+    private final Label catchHandlerLabel = new Label();
+
     public AddTimerMethodAdapter(MethodVisitor methodVisitor, String owner) {
         super(ASM4, methodVisitor);
         this.mv = methodVisitor;
@@ -22,6 +28,13 @@ public class AddTimerMethodAdapter extends MethodVisitor {
     @Override
     public void visitCode() {
         mv.visitCode();
+
+        //try
+        mv.visitTryCatchBlock(tryStartLabel, tryEndLabel, catchHandlerLabel, "java/lang/Exception");
+        //tryStart
+        mv.visitLabel(tryStartLabel);
+
+        //
         mv.visitFieldInsn(GETSTATIC, owner, "timer", "J");
         mv.visitMethodInsn(INVOKESTATIC, "java/lang/System", "currentTimeMillis", "()J", false);
         mv.visitFieldInsn(PUTSTATIC, owner, "timer", "J");
@@ -40,6 +53,34 @@ public class AddTimerMethodAdapter extends MethodVisitor {
 
     @Override
     public void visitMaxs(int maxStack, int maxLocals) {
-        mv.visitMaxs(maxStack + 4, maxLocals);
+
+        //tryEnd
+        mv.visitLabel(tryEndLabel);
+
+        //goto return
+        Label returnLabel = new Label();
+        mv.visitJumpInsn(GOTO, returnLabel);
+
+        //catch
+        mv.visitLabel(catchHandlerLabel);
+        mv.visitFrame(Opcodes.F_SAME1, 0, null, 1, new Object[]{"java/lang/Exception"});
+        mv.visitVarInsn(ASTORE, 1);
+        Label label4 = new Label();
+        mv.visitLabel(label4);
+        mv.visitVarInsn(ALOAD, 1);
+        mv.visitInsn(ATHROW);
+
+        //return
+        mv.visitLabel(returnLabel);
+        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitInsn(RETURN);
+
+        //catch
+        Label label5 = new Label();
+        mv.visitLabel(label5);
+        mv.visitLocalVariable("e", "Ljava/lang/Exception;", null, label4, returnLabel, 1);
+        //mv.visitLocalVariable("this", "L" + owner + ";", null, tryStartLabel, label5, 0);
+
+        mv.visitMaxs(maxStack + 4 + 2, maxLocals + 2);
     }
 }

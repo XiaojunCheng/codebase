@@ -57,6 +57,7 @@ public class AddTimerClassAdapter extends ClassVisitor {
         cr.accept(cv, 0);
         // b2 represents the same class as b1
         byte[] b2 = cw.toByteArray();
+        HelloWorldClassWriter.printHumanReadableText(b2);
         HelloWorldClassWriter.writeByteCode2ClassFile(C.class.getName().replace('.', '/'), b2);
     }
 }
