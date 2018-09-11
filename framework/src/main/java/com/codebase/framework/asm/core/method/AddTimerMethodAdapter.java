@@ -17,7 +17,7 @@ public class AddTimerMethodAdapter extends MethodVisitor {
 
     private final Label tryStartLabel = new Label();
     private final Label tryEndLabel = new Label();
-    private final Label catchHandlerLabel = new Label();
+    private final Label exceptionCatchLabel = new Label();
 
     public AddTimerMethodAdapter(MethodVisitor methodVisitor, String owner) {
         super(ASM4, methodVisitor);
@@ -30,7 +30,7 @@ public class AddTimerMethodAdapter extends MethodVisitor {
         mv.visitCode();
 
         //try
-        mv.visitTryCatchBlock(tryStartLabel, tryEndLabel, catchHandlerLabel, "java/lang/Exception");
+        mv.visitTryCatchBlock(tryStartLabel, tryEndLabel, exceptionCatchLabel, "java/lang/Exception");
         //tryStart
         mv.visitLabel(tryStartLabel);
 
@@ -61,12 +61,13 @@ public class AddTimerMethodAdapter extends MethodVisitor {
         Label returnLabel = new Label();
         mv.visitJumpInsn(GOTO, returnLabel);
 
-        //catch
-        mv.visitLabel(catchHandlerLabel);
+        //catch exception
+        mv.visitLabel(exceptionCatchLabel);
         mv.visitFrame(Opcodes.F_SAME1, 0, null, 1, new Object[]{"java/lang/Exception"});
         mv.visitVarInsn(ASTORE, 1);
-        Label label4 = new Label();
-        mv.visitLabel(label4);
+        //handle exception
+        Label exceptionHandleLabel = new Label();
+        mv.visitLabel(exceptionHandleLabel);
         mv.visitVarInsn(ALOAD, 1);
         mv.visitInsn(ATHROW);
 
@@ -75,10 +76,10 @@ public class AddTimerMethodAdapter extends MethodVisitor {
         mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
         mv.visitInsn(RETURN);
 
-        //catch
-        Label label5 = new Label();
-        mv.visitLabel(label5);
-        mv.visitLocalVariable("e", "Ljava/lang/Exception;", null, label4, returnLabel, 1);
+        //本地变量重命名label
+        Label renameLocalVariableLabel = new Label();
+        mv.visitLabel(renameLocalVariableLabel);
+        mv.visitLocalVariable("e", "Ljava/lang/Exception;", null, exceptionHandleLabel, returnLabel, 1);
         //mv.visitLocalVariable("this", "L" + owner + ";", null, tryStartLabel, label5, 0);
 
         mv.visitMaxs(maxStack + 4 + 2, maxLocals + 2);

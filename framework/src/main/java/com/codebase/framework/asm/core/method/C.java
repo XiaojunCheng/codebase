@@ -19,6 +19,10 @@ public class C {
     }
 
     public String returnStr() {
+        return get();
+    }
+
+    private String get() {
         System.out.println("returnStr");
         return "returnStr";
     }
