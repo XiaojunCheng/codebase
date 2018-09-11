@@ -42,14 +42,14 @@ public class HelloWorldClassWriter {
         cr.accept(ccv, 0);
     }
 
-    private static void useGenerateClass(String className, byte[] classBytes) {
+    public static void useGenerateClass(String className, byte[] classBytes) {
         SelfDefinedClassLoader classLoader = new SelfDefinedClassLoader();
         Class clazz = classLoader.defineClass(className.replace('/', '.'), classBytes);
         Method[] methods = clazz.getMethods();
         System.out.println(methods.length);
     }
 
-    private static void writeByteCode2ClassFile(String className, byte[] classBytes) {
+    public static void writeByteCode2ClassFile(String className, byte[] classBytes) {
         final File classFile = new File("./asm-generated-classes/" + className + ".class");
         final File classPath = new File(classFile.getParent());
         //创建类所在的包路径
