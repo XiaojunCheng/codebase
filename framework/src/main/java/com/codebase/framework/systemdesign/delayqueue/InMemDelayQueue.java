@@ -1,4 +1,4 @@
-package com.codebase.framework.delayqueue;
+package com.codebase.framework.systemdesign.delayqueue;
 
 import sun.misc.Timer;
 
@@ -34,7 +34,7 @@ public class InMemDelayQueue {
             slots[i] = new Slot();
         }
         timer = new Timer(owner -> {
-            currentIndex++;
+            currentIndex = (currentIndex + 1) % SLOT_NUM;
             Set<Task> tasks = task();
             tasks.forEach(t -> t.execute());
         }, 1000);
@@ -78,13 +78,14 @@ class PrintTask implements Task {
     private final int intervalInSec;
 
     public PrintTask(int intervalInSec) {
-        this.generateTimeInSec = System.currentTimeMillis()/1000;
+        this.generateTimeInSec = System.currentTimeMillis() / 1000;
         this.intervalInSec = intervalInSec;
     }
 
     @Override
     public void execute() {
-        long currentTimeInSec = System.currentTimeMillis()/1000;;
+        long currentTimeInSec = System.currentTimeMillis() / 1000;
+        ;
         System.out.println(currentTimeInSec + ", " + generateTimeInSec + ", " + intervalInSec);
     }
 }

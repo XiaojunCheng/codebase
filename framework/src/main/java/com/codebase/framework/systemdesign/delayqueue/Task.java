@@ -1,4 +1,4 @@
-package com.codebase.framework.delayqueue;
+package com.codebase.framework.systemdesign.delayqueue;
 
 /**
  * 任务抽象
