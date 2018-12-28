@@ -2,6 +2,7 @@ package com.codebase.framework.systemdesign.ratelimit;
 
 /**
  * 非并发版本
+ * 注意: 计数器算法缺点在于不平滑,如果有恶意使用的话前面一段时间就可以消耗掉流控限制
  *
  * @author Xiaojun.Cheng
  * @date 2018/12/26

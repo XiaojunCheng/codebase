@@ -1,5 +1,7 @@
 package com.codebase.framework.systemdesign.ratelimit;
 
+import com.google.common.util.concurrent.RateLimiter;
+
 /**
  * @author Xiaojun.Cheng
  * @date 2018/12/26
@@ -16,7 +18,8 @@ public class RateLimitTest {
      * @param args
      */
     public static void main(String[] args) throws InterruptedException {
-        RateLimit limit = new CountRateLimit();
+        //RateLimit limit = new CountRateLimit();
+        RateLimit limit = new RollingWindowRateLimit(1);
         limit.setQPS(2);
 
         long startTime = System.currentTimeMillis();
@@ -36,6 +39,9 @@ public class RateLimitTest {
         long sleepTime4FiveSec = 5000 - (System.currentTimeMillis() - startTime);
         Thread.sleep(sleepTime4FiveSec);
         System.out.println(System.currentTimeMillis() + ", " + limit.allowThisRequest());
+
+        RateLimiter rateLimiter = RateLimiter.create(0.05);
+
     }
 
 }
