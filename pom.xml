@@ -33,7 +33,7 @@
         <jetty-version>6.1.26</jetty-version>
         <!-- zookeeper -->
         <zookeeper.version>3.4.6</zookeeper.version>
-        <curator-recipes.version>2.10.0</curator-recipes.version>
+        <curator.version>2.10.0</curator.version>
         <zkclient.version>0.7</zkclient.version>
         <!-- database -->
         <mysql-connector-java.version>5.1.21</mysql-connector-java.version>
@@ -61,6 +61,8 @@
         <cglib.version>3.2.5</cglib.version>
         <javassist.version>3.21.0-GA</javassist.version>
         <bcel.version>6.1</bcel.version>
+        <mockito.version>1.10.19</mockito.version>
+        <protostuff.version>1.0.8</protostuff.version>
     </properties>
 
     <build>
