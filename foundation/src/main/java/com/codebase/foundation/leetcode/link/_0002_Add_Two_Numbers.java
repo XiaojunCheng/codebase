@@ -6,12 +6,6 @@ package com.codebase.foundation.leetcode.link;
 public class _0002_Add_Two_Numbers {
 
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-
-        if (l1 == null || l2 == null) {
-            return l1 == null ? l2 : l2;
-        }
-
-        ListNode head = l1;
         ListNode pos1 = l1;
         ListNode pos2 = l2;
         int addToHigh = 0;
@@ -29,34 +23,26 @@ public class _0002_Add_Two_Numbers {
             pos2 = pos2.next;
         }
 
-        if (pos1.next == null && pos2.next == null) {
-            if (addToHigh > 0) {
-                pos1.next = new ListNode(addToHigh);
-                return head;
-            }
-        }
-
         if (pos1.next == null) {
             pos1.next = pos2.next;
         }
+
         if (addToHigh <= 0) {
-            return head;
+            return l1;
         }
 
-        while (true) {
+        while (pos1.next != null) {
             pos1.next.val += addToHigh;
             if (pos1.next.val < 10) {
-                return head;
+                return l1;
             }
 
             pos1.next.val -= 10;
             addToHigh = 1;
             pos1 = pos1.next;
-            if (pos1.next == null) {
-                pos1.next = new ListNode(addToHigh);
-                return head;
-            }
         }
+        pos1.next = new ListNode(addToHigh);
+        return l1;
     }
 
     public static void main(String[] args) {
