@@ -56,7 +56,8 @@ public class _0023_MergeKSortedLists_fastest {
                     curNode = l1;
                     l1 = l1.next;
                     if (l1 == null) {
-                        break;
+                        curNode.next = l2;
+                        return head;
                     }
                 }
                 curNode.next = l2;
@@ -68,7 +69,8 @@ public class _0023_MergeKSortedLists_fastest {
                     curNode = l2;
                     l2 = l2.next;
                     if (l2 == null) {
-                        break;
+                        curNode.next = l1;
+                        return head;
                     }
                 }
                 curNode.next = l1;
