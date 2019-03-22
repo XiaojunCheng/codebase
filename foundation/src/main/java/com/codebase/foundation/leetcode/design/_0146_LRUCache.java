@@ -10,12 +10,12 @@ import java.util.*;
  * @author Xiaojun.Cheng
  * @date 2019/3/22
  */
-public class N0146_LRUCache {
+public class _0146_LRUCache {
 
     private final int capacity;
     private final LinkedHashMap<Integer, Integer> cache;
 
-    public N0146_LRUCache(int capacity) {
+    public _0146_LRUCache(int capacity) {
         this.capacity = capacity;
         this.cache = new LinkedHashMap<>(capacity);
     }
@@ -39,7 +39,7 @@ public class N0146_LRUCache {
     }
 
     public static void main(String[] args) {
-        N0146_LRUCache cache = new N0146_LRUCache(2);
+        _0146_LRUCache cache = new _0146_LRUCache(2);
         cache.put(1, 1);
         cache.put(2, 2);
         System.out.println(cache.get(1));// returns 1

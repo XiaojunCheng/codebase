@@ -1,5 +1,7 @@
 package com.codebase.foundation.leetcode.link;
 
+import com.codebase.foundation.leetcode.ListNode;
+
 /**
  * 耗费空间太多
  *

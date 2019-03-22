@@ -1,5 +1,7 @@
 package com.codebase.foundation.leetcode.link;
 
+import com.codebase.foundation.leetcode.ListNode;
+
 /**
  * @author chengxiaojun
  *         空间待优化

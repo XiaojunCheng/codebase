@@ -1,6 +1,8 @@
 package com.codebase.foundation.leetcode.link;
 
 
+import com.codebase.foundation.leetcode.ListNode;
+
 public class _0021_MergeTwoSortedLists {
 
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {

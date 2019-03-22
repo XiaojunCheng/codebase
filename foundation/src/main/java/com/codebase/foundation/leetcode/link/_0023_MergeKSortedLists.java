@@ -1,5 +1,7 @@
 package com.codebase.foundation.leetcode.link;
 
+import com.codebase.foundation.leetcode.ListNode;
+
 /**
  * @author Xiaojun.Cheng
  * @date 2019/3/20
