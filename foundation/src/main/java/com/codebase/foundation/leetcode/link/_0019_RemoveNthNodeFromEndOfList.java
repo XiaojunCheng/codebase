@@ -1,6 +1,6 @@
 package com.codebase.foundation.leetcode.link;
 
-public class _0019_Remove_Nth_Node_From_End_of_List {
+public class _0019_RemoveNthNodeFromEndOfList {
 
     public ListNode removeNthFromEnd(ListNode head, int n) {
 
@@ -41,7 +41,7 @@ public class _0019_Remove_Nth_Node_From_End_of_List {
     }
 
     public static void main(String[] args) {
-        _0019_Remove_Nth_Node_From_End_of_List main = new _0019_Remove_Nth_Node_From_End_of_List();
+        _0019_RemoveNthNodeFromEndOfList main = new _0019_RemoveNthNodeFromEndOfList();
 
         int[][] data = {//
                 {2},//

@@ -1,37 +1,9 @@
 package com.codebase.foundation.leetcode.link;
 
-/**
- * @author Xiaojun.Cheng
- * @date 2019/3/20
- */
-public class _0023_MergeKSortedLists_fastest {
 
-    public ListNode mergeKLists(ListNode[] lists) {
-        if (lists == null || lists.length == 0) {
-            return null;
-        }
+public class _0021_MergeTwoSortedLists {
 
-        if (lists.length == 1) {
-            return lists[0];
-        }
-
-        return merge2Lists(lists, 0, lists.length - 1);
-    }
-
-    private ListNode merge2Lists(ListNode[] lists, int start, int end) {
-        if (start == end) {
-            return lists[start];
-        }
-
-        if (start + 1 == end) {
-            return merge2Lists(lists[start], lists[end]);
-        }
-
-        int mid = (end - start) / 2 + start;
-        return merge2Lists(merge2Lists(lists, start, mid), merge2Lists(lists, mid + 1, end));
-    }
-
-    private ListNode merge2Lists(ListNode l1, ListNode l2) {
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         if (l1 == null) {
             return l2;
         }
@@ -85,15 +57,12 @@ public class _0023_MergeKSortedLists_fastest {
     }
 
     public static void main(String[] args) {
-        _0023_MergeKSortedLists_fastest main = new _0023_MergeKSortedLists_fastest();
-
-        ListNode[] list = new ListNode[]{
-                ListNode.buildListNode(new int[]{1, 4, 5}),
-                ListNode.buildListNode(new int[]{1, 3, 4}),
-                ListNode.buildListNode(new int[]{2, 6})
-        };
-        ListNode result = main.mergeKLists(list);
-        ListNode.printListNode(result);
+        _0021_MergeTwoSortedLists main = new _0021_MergeTwoSortedLists();
+        ListNode.printListNode(//
+                main.mergeTwoLists(//
+                        ListNode.buildListNode(new int[]{0, 2, 4, 5}),//
+                        ListNode.buildListNode(new int[]{1, 2, 3, 4})//
+                )//
+        );
     }
-
 }

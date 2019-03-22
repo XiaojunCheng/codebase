@@ -1,6 +1,6 @@
 package com.codebase.foundation.leetcode.link;
 
-public class _0024_Swap_Nodes_in_Pairs {
+public class _0024_SwapNodesInPairs {
 
     public ListNode swapPairs(ListNode head) {
 

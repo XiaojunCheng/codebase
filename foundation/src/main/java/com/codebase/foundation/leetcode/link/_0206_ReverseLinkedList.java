@@ -24,6 +24,36 @@ public class _0206_ReverseLinkedList {
         return newHead;
     }
 
+    /**
+     * 优化版本
+     *
+     * @param head
+     * @return
+     */
+    public ListNode reverseList2(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        ListNode nextNode = head.next;
+        head.next = null;
+
+        ListNode newHead = reverseList(nextNode);
+        nextNode.next = head;
+        return newHead;
+    }
+
+    public ListNode reverseList3(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        ListNode newHead = reverseList(head.next);
+        head.next.next = head;
+        head.next = null;
+        return newHead;
+    }
+
     public static void main(String[] args) {
         _0206_ReverseLinkedList main = new _0206_ReverseLinkedList();
         int[] value1 = {1};

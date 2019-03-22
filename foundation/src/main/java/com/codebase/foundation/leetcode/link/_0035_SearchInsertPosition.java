@@ -1,6 +1,6 @@
 package com.codebase.foundation.leetcode.link;
 
-public class _0035_Search_Insert_Position {
+public class _0035_SearchInsertPosition {
 
     public int searchInsert(int[] nums, int target) {
 
@@ -18,7 +18,7 @@ public class _0035_Search_Insert_Position {
     }
 
     public static void main(String[] args) {
-        _0035_Search_Insert_Position main = new _0035_Search_Insert_Position();
+        _0035_SearchInsertPosition main = new _0035_SearchInsertPosition();
         System.out.println(main.searchInsert(new int[]{1, 3, 5, 6}, 5));//2
         System.out.println(main.searchInsert(new int[]{1, 3, 5, 6}, 2));//1
         System.out.println(main.searchInsert(new int[]{1, 3, 5, 6}, 7));//4

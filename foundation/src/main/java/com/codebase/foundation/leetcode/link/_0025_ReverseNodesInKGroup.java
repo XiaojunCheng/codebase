@@ -6,7 +6,7 @@ package com.codebase.foundation.leetcode.link;
  * @author Xiaojun.Cheng
  * @date 2019/3/20
  */
-public class N0025_ReverseNodesInKGroup {
+public class _0025_ReverseNodesInKGroup {
 
     public ListNode reverseKGroup(ListNode head, int k) {
         if (head == null || k == 1) {
@@ -27,17 +27,16 @@ public class N0025_ReverseNodesInKGroup {
             return (count % k == 0) ? reverseList(head) : head;
         }
 
-        ListNode tail = head;
         ListNode subReverseKGroup = reverseKGroup(curNode.next, k);
         curNode.next = null;
         curNode = reverseList(head);
-        tail.next = subReverseKGroup;
+        head.next = subReverseKGroup;
 
         return curNode;
     }
 
     public static void main(String[] args) {
-        N0025_ReverseNodesInKGroup main = new N0025_ReverseNodesInKGroup();
+        _0025_ReverseNodesInKGroup main = new _0025_ReverseNodesInKGroup();
         ListNode node1 = ListNode.buildListNode(new int[]{1, 2, 3, 4, 5});
         ListNode result1 = main.reverseKGroup(node1, 3);
         ListNode.printListNode(result1);

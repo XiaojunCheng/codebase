@@ -3,7 +3,7 @@ package com.codebase.foundation.leetcode.link;
 /**
  * 20% 待优化
  */
-public class _0002_Add_Two_Numbers {
+public class _0002_AddTwoNumbers {
 
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode head = l1;
@@ -45,7 +45,7 @@ public class _0002_Add_Two_Numbers {
     }
 
     public static void main(String[] args) {
-        _0002_Add_Two_Numbers main = new _0002_Add_Two_Numbers();
+        _0002_AddTwoNumbers main = new _0002_AddTwoNumbers();
 
         {
             int[] value1 = {2, 4, 3};
