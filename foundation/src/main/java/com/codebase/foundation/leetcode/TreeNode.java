@@ -35,6 +35,7 @@ public class TreeNode {
             return;
         }
         printInSecondOrder(root);
+        System.out.println();
     }
 
     private static void printInSecondOrder(TreeNode root) {
@@ -47,9 +48,13 @@ public class TreeNode {
             System.out.print(node.val + ", ");
             if (node.left != null) {
                 treeNodes.add(node.left);
+            } else {
+                System.out.print("null, ");
             }
             if (node.right != null) {
                 treeNodes.add(node.right);
+            } else {
+                System.out.print("null, ");
             }
         }
     }

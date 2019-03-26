@@ -1,4 +1,4 @@
-package com.codebase.foundation.leetcode.link;
+package com.codebase.foundation.leetcode.list;
 
 public class _0035_SearchInsertPosition {
 

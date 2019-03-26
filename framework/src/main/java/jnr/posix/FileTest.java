@@ -110,7 +110,7 @@ public class FileTest {
         // FIXME: On Windows this is working but providing wrong numbers and therefore getting wrong results.
         if (!Platform.IS_WINDOWS) {
             File f1 = File.createTempFile("lutimes", null);
-            File f2 = new File(f1.getParentFile(), "lutimes-link");
+            File f2 = new File(f1.getParentFile(), "lutimes-list");
             posix.symlink(f1.getAbsolutePath(), f2.getAbsolutePath());
 
             int rval = posix.utimes(f1.getAbsolutePath(), new long[]{800, 0}, new long[]{900, 0});
@@ -150,9 +150,9 @@ public class FileTest {
     @Test
     public void linkTest() throws Throwable {
         File f1 = File.createTempFile("utime", null);
-        File f2 = new File(f1.getAbsolutePath() + "link");
+        File f2 = new File(f1.getAbsolutePath() + "list");
         int rval = posix.link(f1.getAbsolutePath(), f2.getAbsolutePath());
-        assertEquals("link did not return 0", 0, rval);
+        assertEquals("list did not return 0", 0, rval);
         assertTrue("Link was not created", f2.exists());
         f1.delete();
         f2.delete();
@@ -479,7 +479,7 @@ public class FileTest {
     public void readlinkTest() throws IOException {
         if (!Platform.IS_WINDOWS) {
             File file = File.createTempFile("jnr-PosixDriver-readlink-test", "tmp");
-            File link = new File(file.getAbsolutePath() + "link");
+            File link = new File(file.getAbsolutePath() + "list");
 
             posix.symlink(file.getAbsolutePath(), link.getAbsolutePath());
 
@@ -497,7 +497,7 @@ public class FileTest {
     public void readlinkByteBufferTest() throws IOException {
         if (!Platform.IS_WINDOWS) {
             File file = File.createTempFile("jnr-PosixDriver-readlink-test", "tmp");
-            File link = new File(file.getAbsolutePath() + "link");
+            File link = new File(file.getAbsolutePath() + "list");
 
             posix.symlink(file.getAbsolutePath(), link.getAbsolutePath());
 
@@ -515,7 +515,7 @@ public class FileTest {
     public void readlinkPointerTest() throws IOException {
         if (!Platform.IS_WINDOWS) {
             File file = File.createTempFile("jnr-PosixDriver-readlink-test", "tmp");
-            File link = new File(file.getAbsolutePath() + "link");
+            File link = new File(file.getAbsolutePath() + "list");
 
             int bufSize = 1024;
             int filenameLength = file.getAbsolutePath().length();
