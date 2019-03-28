@@ -6,7 +6,7 @@ import com.codebase.foundation.leetcode.TreeNode;
  * Runtime: 8 ms, faster than 98.30% of Java online submissions for Subtree of Another Tree.
  * Memory Usage: 40.8 MB, less than 91.79% of Java online submissions for Subtree of Another Tree.
  */
-public class _0572_SubtreeOfAnotherTree {
+public class _0572_Subtree_of_Another_Tree {
 
     public boolean isSubtree(TreeNode s, TreeNode t) {
         if (s == null || t == null) {

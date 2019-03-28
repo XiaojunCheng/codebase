@@ -6,7 +6,7 @@ import com.codebase.foundation.leetcode.TreeNode;
  * Runtime: 5 ms, faster than 100.00% of Java online submissions for Merge Two Binary Trees.
  * Memory Usage: 41.7 MB, less than 26.21% of Java online submissions for Merge Two Binary Trees.
  */
-public class _0617_MergeTwoBinaryTrees {
+public class _0617_Merge_Two_Binary_Trees {
 
     public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
         if (t1 == null || t2 == null) {
