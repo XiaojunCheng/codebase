@@ -1,4 +1,4 @@
-package com.codebase.foundation.leetcode.unclassified;
+package com.codebase.foundation.leetcode.greedy;
 
 /**
  * Runtime: 1 ms, faster than 82.58% of Java online submissions for Best Time to Buy and Sell Stock.
