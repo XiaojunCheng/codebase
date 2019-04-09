@@ -82,9 +82,9 @@ public class ByteUtil {
     public static int toUnsignedByte(byte data) {
         return data & 0x0FF;
     }
-    
+
     /***
-     * @param b 
+     * @param b
      * @param position range from 0 to 7
      * @return
      */
@@ -100,7 +100,7 @@ public class ByteUtil {
     /**
      * @param b
      * @param position range is from 0 to 7
-     * @param flag  false then set as 0, true then set as 1
+     * @param flag     false then set as 0, true then set as 1
      * @return
      */
     public static byte setBitValue(byte b, int position, boolean flag) {

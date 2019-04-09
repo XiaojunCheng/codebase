@@ -10,17 +10,20 @@ public class ConditionExpressionTrick {
         Object o1 = true ? new Integer(1) : new Double(2.0);
 
         Object o2;
-        if (true)
+        if (true) {
             o2 = new Integer(1);
-        else
+        } else {
             o2 = new Double(2.0);
+        }
+
 
         System.out.println(o1);
         System.out.println(o2);
 
         Integer i = new Integer(1);
-        if (i.equals(1))
+        if (i.equals(1)) {
             i = null;
+        }
         Double d = new Double(2.0);
         Object o = true ? i : d; // NullPointerException!
         System.out.println(o);

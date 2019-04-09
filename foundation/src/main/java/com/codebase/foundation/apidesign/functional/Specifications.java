@@ -46,21 +46,11 @@ public class Specifications {
     }
 
     public static <T> Specification<T> notNull() {
-        return new Specification<T>() {
-            @Override
-            public boolean satisfiedBy(T item) {
-                return item != null;
-            }
-        };
+        return item -> item != null;
     }
 
     public static <FROM, TO> Specification<FROM> translate(final Function<FROM, TO> function, final Specification<? super TO> specification) {
-        return new Specification<FROM>() {
-            @Override
-            public boolean satisfiedBy(FROM item) {
-                return specification.satisfiedBy(function.map(item));
-            }
-        };
+        return item -> specification.satisfiedBy(function.map(item));
     }
 
     public static class AndSpecification<T> implements Specification<T> {

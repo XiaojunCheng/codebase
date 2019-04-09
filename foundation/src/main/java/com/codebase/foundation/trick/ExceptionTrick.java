@@ -17,7 +17,6 @@ public class ExceptionTrick {
         ExceptionTrick.doThrow0(e);
     }
 
-    @SuppressWarnings("unchecked")
     static <E extends Exception> void doThrow0(Exception e) throws E {
         throw (E) e;
     }

@@ -9,7 +9,14 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class RpcProviderBootstrap {
 
     public static void main(String[] args) {
-        new ClassPathXmlApplicationContext("rpc/provider.xml");
+        ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("rpc/provider.xml");
+        System.out.println("========");
+        try {
+            Thread.sleep(30 * 1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ctx.close();
     }
 
 }

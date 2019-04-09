@@ -45,15 +45,15 @@ public class ZookeeperConfigClient implements ConfigClient, ConnectionStateListe
      * 监听节点数据变化的缓存
      */
     private final ConcurrentMap<String, Lock> dataPathLocks = new ConcurrentHashMap<>();
-    private final Map<String, NodeCache> dataWatchers = new ConcurrentHashMap<>();
-    private final Map<String, List<StateChangeListener>> dataListeners = new ConcurrentHashMap<>();
+    private final ConcurrentMap<String, NodeCache> dataWatchers = new ConcurrentHashMap<>();
+    private final ConcurrentMap<String, List<StateChangeListener>> dataListeners = new ConcurrentHashMap<>();
 
     /**
      * 监听子节点变化的缓存
      */
     private final ConcurrentMap<String, Lock> childrenPathLocks = new ConcurrentHashMap<>();
-    private final Map<String, PathChildrenCache> childrenWatcher = new ConcurrentHashMap<>();
-    private final Map<String, List<StateChangeListener>> childrenListeners = new ConcurrentHashMap<>();
+    private final ConcurrentMap<String, PathChildrenCache> childrenWatcher = new ConcurrentHashMap<>();
+    private final ConcurrentMap<String, List<StateChangeListener>> childrenListeners = new ConcurrentHashMap<>();
 
     /**
      * 所有持有的锁

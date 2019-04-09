@@ -43,50 +43,55 @@ public class RpcServer implements ApplicationContextAware, InitializingBean {
     }
 
     @Override
-    public void afterPropertiesSet() throws Exception {
-        EventLoopGroup bossGroup = new NioEventLoopGroup();
-        EventLoopGroup workerGroup = new NioEventLoopGroup();
-        try {
-            ServerBootstrap bootstrap = new ServerBootstrap();
-            bootstrap.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class)
-                    .childHandler(new ChannelInitializer<SocketChannel>() {
-                        @Override
-                        public void initChannel(SocketChannel channel) throws Exception {
-                            channel.pipeline()
-                                    /**
-                                     * 将 RPC 请求进行解码（为了处理请求）
-                                     */
-                                    .addLast(new RpcDecoder(RpcRequest.class))
-                                    /**
-                                     * 将 RPC 响应进行编码（为了返回响应）
-                                     */
-                                    .addLast(new RpcEncoder(RpcResponse.class))
-                                    /**
-                                     * 处理 RPC 请求
-                                     */
-                                    .addLast(new RpcHandler(handlerMap));
-                        }
-                    })
-                    .option(ChannelOption.SO_BACKLOG, 128)
-                    .childOption(ChannelOption.SO_KEEPALIVE, true);
+    public void afterPropertiesSet() {
+        Thread thread = new Thread(() -> {
+            EventLoopGroup bossGroup = new NioEventLoopGroup();
+            EventLoopGroup workerGroup = new NioEventLoopGroup();
+            try {
+                ServerBootstrap bootstrap = new ServerBootstrap();
+                bootstrap.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class)
+                        .childHandler(new ChannelInitializer<SocketChannel>() {
+                            @Override
+                            public void initChannel(SocketChannel channel) {
+                                channel.pipeline()
+                                        /**
+                                         * 将 RPC 请求进行解码（为了处理请求）
+                                         */
+                                        .addLast(new RpcDecoder(RpcRequest.class))
+                                        /**
+                                         * 将 RPC 响应进行编码（为了返回响应）
+                                         */
+                                        .addLast(new RpcEncoder(RpcResponse.class))
+                                        /**
+                                         * 处理 RPC 请求
+                                         */
+                                        .addLast(new RpcHandler(handlerMap));
+                            }
+                        })
+                        .option(ChannelOption.SO_BACKLOG, 128)
+                        .childOption(ChannelOption.SO_KEEPALIVE, true);
 
-            String[] array = serverAddress.split(":");
-            String host = array[0];
-            int port = Integer.parseInt(array[1]);
+                String[] array = serverAddress.split(":");
+                String host = array[0];
+                int port = Integer.parseInt(array[1]);
 
-            ChannelFuture future = bootstrap.bind(host, port).sync();
-            LOGGER.debug("server started on port {}", port);
+                ChannelFuture future = bootstrap.bind(host, port).sync();
+                LOGGER.debug("server started on port {}", port);
 
-            if (serviceRegistry != null) {
-                //注册服务地址
-                serviceRegistry.register(serverAddress);
+                if (serviceRegistry != null) {
+                    //注册服务地址
+                    serviceRegistry.register(serverAddress);
+                }
+
+                future.channel().closeFuture().sync();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } finally {
+                workerGroup.shutdownGracefully();
+                bossGroup.shutdownGracefully();
             }
-
-            future.channel().closeFuture().sync();
-        } finally {
-            workerGroup.shutdownGracefully();
-            bossGroup.shutdownGracefully();
-        }
+        });
+        thread.start();
     }
 
     @Override

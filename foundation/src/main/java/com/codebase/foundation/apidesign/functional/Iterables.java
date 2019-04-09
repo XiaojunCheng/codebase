@@ -47,91 +47,80 @@ public final class Iterables {
     }
 
     public static <T> Iterable<T> constant(final T item) {
-        return new Iterable<T>() {
+        return () -> new Iterator<T>() {
             @Override
-            public Iterator<T> iterator() {
-                return new Iterator<T>() {
-                    @Override
-                    public boolean hasNext() {
-                        return true;
-                    }
+            public boolean hasNext() {
+                return true;
+            }
 
-                    @Override
-                    public T next() {
-                        return item;
-                    }
+            @Override
+            public T next() {
+                return item;
+            }
 
-                    @Override
-                    public void remove() {
-                    }
-                };
+            @Override
+            public void remove() {
             }
         };
     }
 
     public static <T> Iterable<T> limit(final int limitItems, final Iterable<T> iterable) {
-        return new Iterable<T>() {
-            @Override
-            public Iterator<T> iterator() {
-                final Iterator<T> iterator = iterable.iterator();
+        return () -> {
+            final Iterator<T> iterator = iterable.iterator();
 
-                return new Iterator<T>() {
-                    int count;
+            return new Iterator<T>() {
+                int count;
 
-                    @Override
-                    public boolean hasNext() {
-                        return count < limitItems && iterator.hasNext();
-                    }
+                @Override
+                public boolean hasNext() {
+                    return count < limitItems && iterator.hasNext();
+                }
 
-                    @Override
-                    public T next() {
-                        count++;
-                        return iterator.next();
-                    }
+                @Override
+                public T next() {
+                    count++;
+                    return iterator.next();
+                }
 
-                    @Override
-                    public void remove() {
-                        iterator.remove();
-                    }
-                };
-            }
+                @Override
+                public void remove() {
+                    iterator.remove();
+                }
+            };
         };
     }
 
     public static <T> Iterable<T> unique(final Iterable<T> iterable) {
-        return new Iterable<T>() {
-            @Override
-            public Iterator<T> iterator() {
-                final Iterator<T> iterator = iterable.iterator();
+        return () -> {
+            final Iterator<T> iterator = iterable.iterator();
 
-                return new Iterator<T>() {
-                    Set<T> items = new HashSet<T>();
-                    T nextItem;
+            return new Iterator<T>() {
+                Set<T> items = new HashSet<T>();
+                T nextItem;
 
-                    @Override
-                    public boolean hasNext() {
-                        while (iterator.hasNext()) {
-                            nextItem = iterator.next();
-                            if (items.add(nextItem))
-                                return true;
-                        }
-
-                        return false;
+                @Override
+                public boolean hasNext() {
+                    while (iterator.hasNext()) {
+                        nextItem = iterator.next();
+                        if (items.add(nextItem))
+                            return true;
                     }
 
-                    @Override
-                    public T next() {
-                        if (nextItem == null && !hasNext())
-                            throw new NoSuchElementException();
+                    return false;
+                }
 
-                        return nextItem;
-                    }
+                @Override
+                public T next() {
+                    if (nextItem == null && !hasNext())
+                        throw new NoSuchElementException();
 
-                    @Override
-                    public void remove() {
-                    }
-                };
-            }
+                    return nextItem;
+                }
+
+                @Override
+                public void remove() {
+                }
+            };
         };
     }
 
@@ -324,12 +313,7 @@ public final class Iterables {
     }
 
     public static <FROM, TO> Function<FROM, TO> cast() {
-        return new Function<FROM, TO>() {
-            @Override
-            public TO map(FROM from) {
-                return (TO) from;
-            }
-        };
+        return from -> (TO) from;
     }
 
     public static <FROM, TO> TO fold(Function<? super FROM, TO> function, Iterable<? extends FROM> i) {
@@ -337,103 +321,92 @@ public final class Iterables {
     }
 
     public static <T, C extends T> Iterable<T> prepend(final C item, final Iterable<T> iterable) {
-        return new Iterable<T>() {
+        return () -> new Iterator<T>() {
+            T first = item;
+            Iterator<T> iterator;
+
             @Override
-            public Iterator<T> iterator() {
-                return new Iterator<T>() {
-                    T first = item;
-                    Iterator<T> iterator;
-
-                    @Override
-                    public boolean hasNext() {
-                        if (first != null)
-                            return true;
-                        else {
-                            if (iterator == null) {
-                                iterator = iterable.iterator();
-                            }
-                        }
-
-                        return iterator.hasNext();
+            public boolean hasNext() {
+                if (first != null)
+                    return true;
+                else {
+                    if (iterator == null) {
+                        iterator = iterable.iterator();
                     }
+                }
 
-                    @Override
-                    public T next() {
-                        if (first != null) {
-                            try {
-                                return first;
-                            } finally {
-                                first = null;
-                            }
-                        } else
-                            return iterator.next();
-                    }
+                return iterator.hasNext();
+            }
 
-                    @Override
-                    public void remove() {
+            @Override
+            public T next() {
+                if (first != null) {
+                    try {
+                        return first;
+                    } finally {
+                        first = null;
                     }
-                };
+                } else
+                    return iterator.next();
+            }
+
+            @Override
+            public void remove() {
             }
         };
     }
 
     public static <T, C extends T> Iterable<T> append(final C item, final Iterable<T> iterable) {
-        return new Iterable<T>() {
-            @Override
-            public Iterator<T> iterator() {
-                final Iterator<T> iterator = iterable.iterator();
+        return () -> {
+            final Iterator<T> iterator = iterable.iterator();
 
-                return new Iterator<T>() {
-                    T last = item;
+            return new Iterator<T>() {
+                T last = item;
 
-                    @Override
-                    public boolean hasNext() {
-                        if (iterator.hasNext()) {
-                            return true;
-                        } else {
-                            return last != null;
+                @Override
+                public boolean hasNext() {
+                    if (iterator.hasNext()) {
+                        return true;
+                    } else {
+                        return last != null;
+                    }
+                }
+
+                @Override
+                public T next() {
+                    if (iterator.hasNext())
+                        return iterator.next();
+                    else
+                        try {
+                            return last;
+                        } finally {
+                            last = null;
                         }
-                    }
+                }
 
-                    @Override
-                    public T next() {
-                        if (iterator.hasNext())
-                            return iterator.next();
-                        else
-                            try {
-                                return last;
-                            } finally {
-                                last = null;
-                            }
-                    }
-
-                    @Override
-                    public void remove() {
-                    }
-                };
-            }
+                @Override
+                public void remove() {
+                }
+            };
         };
     }
 
     public static <T> Iterable<T> debug(String format, final Iterable<T> iterable, final Function<T, String>... functions) {
         final MessageFormat msgFormat = new MessageFormat(format);
 
-        return map(new Function<T, T>() {
-            @Override
-            public T map(T t) {
-                if (functions.length == 0)
-                    debugLogger.info(msgFormat.format(new Object[]{t}));
-                else {
-                    String[] mapped = new String[functions.length];
-                    for (int i = 0; i < functions.length; i++) {
-                        Function<T, String> function = functions[i];
-                        mapped[i] = function.map(t);
-                        debugLogger.info(msgFormat.format(mapped));
-                    }
+        return map(t -> {
+            if (functions.length == 0)
+                debugLogger.info(msgFormat.format(new Object[]{t}));
+            else {
+                String[] mapped = new String[functions.length];
+                for (int i = 0; i < functions.length; i++) {
+                    Function<T, String> function = functions[i];
+                    mapped[i] = function.map(t);
+                    debugLogger.info(msgFormat.format(mapped));
                 }
-
-                return t;
             }
+
+            return t;
         }, iterable);
     }
 

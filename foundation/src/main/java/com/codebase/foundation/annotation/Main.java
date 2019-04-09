@@ -12,7 +12,6 @@ public class Main {
         Method[] methods = book.getClass().getMethods();
 
         boolean flag = book.getClass().isAnnotationPresent(Description.class);
-
         if (flag) {
             Description description = book.getClass().getAnnotation(Description.class);
             System.out.println("Description--->" + description.value());
@@ -23,7 +22,6 @@ public class Main {
                 }
             }
         }
-
     }
 
 }
