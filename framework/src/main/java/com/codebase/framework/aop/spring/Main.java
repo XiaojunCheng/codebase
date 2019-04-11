@@ -19,37 +19,23 @@ public class Main {
         //JDK Proxy方式
         Camera camera = (Camera) Proxy.newProxyInstance(Camera.class.getClassLoader(),
                 new Class[]{Camera.class},
-                new JDKInvocationHandler(new Camera() {
-                    @Override
-                    public void play() {
-                        System.out.println("mini");
-                    }
-                }));
+                new JDKInvocationHandler((Camera) () -> System.out.println("mini")));
         camera.play();
 
         //Cglib
-        TV tv = (TV) Enhancer.create(TV.class, new MethodInterceptor() {
-            @Override
-            public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy)
-                    throws Throwable {
-                System.out.println("Cglib method before: " + method.getName());
-                try {
-                    return proxy.invokeSuper(obj, args);
-                } finally {
-                    System.out.println("Cglib method after: " + method.getName());
-                }
+        TV tv = (TV) Enhancer.create(TV.class, (MethodInterceptor) (obj, method, args1, proxy) -> {
+            System.out.println("Cglib method before: " + method.getName());
+            try {
+                return proxy.invokeSuper(obj, args1);
+            } finally {
+                System.out.println("Cglib method after: " + method.getName());
             }
         });
         tv.play();
 
         Runnable run = (Runnable) Proxy.newProxyInstance(Runnable.class.getClassLoader(),
                 new Class[]{Runnable.class},
-                new JDKInvocationHandler(new Runnable() {
-                    @Override
-                    public void run() {
-                        System.out.println("hello");
-                    }
-                }));
+                new JDKInvocationHandler((Runnable) () -> System.out.println("hello")));
         run.run();
     }
 

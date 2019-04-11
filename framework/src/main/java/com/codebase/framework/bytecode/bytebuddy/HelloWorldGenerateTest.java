@@ -1,4 +1,4 @@
-package com.codebase.framework.bytebuddy;
+package com.codebase.framework.bytecode.bytebuddy;
 
 import com.codebase.framework.asm.core.write.HelloWorldClassWriter;
 import net.bytebuddy.ByteBuddy;
@@ -9,7 +9,7 @@ import net.bytebuddy.matcher.ElementMatchers;
  * @author Xiaojun.Cheng
  * @date 2018/9/17
  */
-public class HelloWorldGenerator {
+public class HelloWorldGenerateTest {
 
     public static void main(String[] args) throws IllegalAccessException, InstantiationException {
         {
