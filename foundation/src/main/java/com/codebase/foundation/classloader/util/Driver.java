@@ -36,6 +36,13 @@ public class Driver {
             }
         }
 
+        System.out.println("=========");
+        ClassLoader c = Driver.class.getClassLoader();
+        while(c != null) {
+            System.out.println(c.getClass().getName());
+            c = c.getParent();
+        }
+        System.out.println("=========");
         ClassLoader systemClassLoader = ClassLoader.getSystemClassLoader();
         System.out.println("system class loader: " + systemClassLoader);
         ClassLoader extClassLoader = systemClassLoader.getParent();

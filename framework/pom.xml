@@ -15,18 +15,6 @@
     <dependencies>
 
         <dependency>
-            <groupId>com.youzan.platform</groupId>
-            <artifactId>bootstrap</artifactId>
-            <version>3.1.0-RELEASE</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.youzan.replay</groupId>
-            <artifactId>replay-core-api</artifactId>
-            <version>1.1.9-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
             <groupId>com.codebase</groupId>
             <artifactId>codebase-common</artifactId>
             <version>${project.version}</version>
@@ -290,6 +278,11 @@
             <version>${byte-buddy.version}</version>
         </dependency>
         <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy-agent</artifactId>
+            <version>${byte-buddy.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.ow2.asm</groupId>
             <artifactId>asm</artifactId>
             <version>${asm.version}</version>
@@ -369,6 +362,12 @@
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
             <version>4.1.17.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
         </dependency>
 
     </dependencies>

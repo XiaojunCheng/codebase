@@ -9,7 +9,6 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import org.apache.commons.collections.MapUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -100,7 +99,7 @@ public class RpcServer implements ApplicationContextAware, InitializingBean {
          * 获取所有带有 RpcService 注解的 Spring Bean
          */
         Map<String, Object> serviceBeanMap = applicationContext.getBeansWithAnnotation(RpcService.class);
-        if (MapUtils.isNotEmpty(serviceBeanMap)) {
+        if (!serviceBeanMap.isEmpty()) {
             for (Object serviceBean : serviceBeanMap.values()) {
                 RpcService service = serviceBean.getClass().getAnnotation(RpcService.class);
                 String interfaceName = service.value().getName();

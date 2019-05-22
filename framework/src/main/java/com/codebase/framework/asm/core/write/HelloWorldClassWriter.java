@@ -12,7 +12,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Method;
 
-import static org.apache.commons.io.FileUtils.writeByteArrayToFile;
+import org.apache.commons.io.FileUtils;
+
 import static org.objectweb.asm.Opcodes.*;
 
 /**
@@ -59,7 +60,7 @@ public class HelloWorldClassWriter {
         }
         //将类字节码写入文件
         try {
-            writeByteArrayToFile(classFile, classBytes);
+            FileUtils.writeByteArrayToFile(classFile, classBytes);
         } catch (IOException e) {
             log.warn("dump class:{} to file {} failed.", className, classFile, e);
         }

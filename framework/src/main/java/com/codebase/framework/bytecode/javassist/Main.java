@@ -15,7 +15,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
 
         ClassPool classPool = ClassPool.getDefault();
-        CtClass ctClass = classPool.get("com.codebase.framework.bytecode.javassist.TestClass");
+        CtClass ctClass = classPool.get("com.codebase.framework.bytecode.javassist.Clazz");
 
         CtMethod ctMethod = ctClass.getDeclaredMethod("say");
         ctMethod.insertBefore("System.out.println(\"before\");");

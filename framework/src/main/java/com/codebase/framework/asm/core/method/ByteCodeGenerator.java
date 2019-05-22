@@ -13,6 +13,9 @@ public class ByteCodeGenerator {
 
     public static void main(String[] args) throws IOException {
         String className = C.class.getCanonicalName();
+
+
+
         ASMifier.main(new String[]{
                 className
         });
