@@ -1,5 +1,6 @@
 package com.codebase.framework.asm.core.write;
 
+import com.codebase.framework.asm.core.util.SelfDefinedClassLoader;
 import lombok.extern.slf4j.Slf4j;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
@@ -63,12 +64,6 @@ public class HelloWorldClassWriter {
             FileUtils.writeByteArrayToFile(classFile, classBytes);
         } catch (IOException e) {
             log.warn("dump class:{} to file {} failed.", className, classFile, e);
-        }
-    }
-
-    static class SelfDefinedClassLoader extends ClassLoader {
-        public Class defineClass(String name, byte[] b) {
-            return defineClass(name, b, 0, b.length);
         }
     }
 

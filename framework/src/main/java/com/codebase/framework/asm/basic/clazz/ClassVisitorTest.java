@@ -1,9 +1,11 @@
 package com.codebase.framework.asm.basic.clazz;
 
+import com.codebase.framework.asm.core.method.C;
+import com.codebase.framework.asm.core.util.SelfDefinedClassLoader;
 import lombok.extern.slf4j.Slf4j;
 import org.objectweb.asm.*;
+import org.objectweb.asm.commons.AdviceAdapter;
 
-import java.io.IOException;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -14,8 +16,8 @@ public class ClassVisitorTest extends ClassVisitor {
 
     private final AtomicLong SEQ = new AtomicLong(0);
 
-    public ClassVisitorTest(int api) {
-        super(api);
+    public ClassVisitorTest() {
+        super(Opcodes.ASM4);
     }
 
     @Override
@@ -70,7 +72,8 @@ public class ClassVisitorTest extends ClassVisitor {
         log.info("{}. visitMethod", SEQ.incrementAndGet());
         log.info("\t access: {}, name: {}, desc: {}, signature: {}, exceptions: {}", access, name, desc, signature, exceptions);
         if (cv != null) {
-            return cv.visitMethod(access, name, desc, signature, exceptions);
+            MethodVisitor mv = cv.visitMethod(access, name, desc, signature, exceptions);
+            return new MethodVisitorTest(mv, access, name, desc);
         }
         return null;
     }
@@ -111,11 +114,30 @@ public class ClassVisitorTest extends ClassVisitor {
         }
     }
 
-    public static void main(String[] args) throws IOException {
-        String className = Clazz.class.getCanonicalName();
-        ClassVisitorTest cp = new ClassVisitorTest(Opcodes.ASM4);
+    public static void main(String[] args) throws Exception {
+        String className = C.class.getCanonicalName();
+        ClassVisitorTest cp = new ClassVisitorTest();
         ClassReader cr = new ClassReader(className);
         cr.accept(cp, 0);
+
+        C c = new C();
+        c.m();
+    }
+
+}
+
+class MethodVisitorTest extends AdviceAdapter {
+
+    protected MethodVisitorTest(MethodVisitor methodVisitor, int access, String name, String descriptor) {
+        super(ASM4, methodVisitor, access, name, descriptor);
+    }
+
+    @Override
+    public void visitLineNumber(int line, Label start) {
+        if (this.mv != null) {
+            this.mv.visitLineNumber(line, start);
+        }
+        System.out.println("AdviceAdapter.visitLineNumber, line: " + line + ", label: " + start.toString());
     }
 
 }

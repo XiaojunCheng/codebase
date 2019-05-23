@@ -11,8 +11,9 @@ public class C {
     public void m() throws Exception {
         try {
 //        timer = System.currentTimeMillis();
-        Thread.sleep(100);
+            Thread.sleep(100);
 //        timer = System.currentTimeMillis() - timer;
+            System.out.println("hello");
         } catch (Exception e) {
             throw e;
         }
