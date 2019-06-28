@@ -19,4 +19,16 @@ public class T {
         }
     }
 
+    public static void main(String[] args) throws InterruptedException {
+        try {
+            System.out.println("start");
+            throw new InterruptedException("hello");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            System.out.println("final");
+        }
+    }
+
 }

@@ -79,6 +79,7 @@ class MyClassVisitor extends ClassVisitor {
             final String signature,
             final String[] exceptions) {
         if (cv != null) {
+            System.out.println("ttttt.visitMethod, name: " + name + ", descriptor: " + descriptor);
             MethodVisitor mv = cv.visitMethod(access, name, descriptor, signature, exceptions);
             return new MyMethodVisitor(mv, access, name, descriptor, className);
         }
